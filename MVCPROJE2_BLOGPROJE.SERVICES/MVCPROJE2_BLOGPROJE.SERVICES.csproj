@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MVCPROJE2_BLOGPROJE.CORE\MVCPROJE2_BLOGPROJE.CORE.csproj" />
+    <ProjectReference Include="..\MVCPROJE2_BLOGPROJE.DATAACCESS\MVCPROJE2_BLOGPROJE.DATAACCESS.csproj" />
   </ItemGroup>
 
 </Project>
