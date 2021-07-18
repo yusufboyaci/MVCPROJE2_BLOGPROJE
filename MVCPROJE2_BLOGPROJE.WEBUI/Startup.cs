@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using MVCPROJE2_BLOGPROJE.DATAACCESS.Context;
 using MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods;
 using MVCPROJE2_BLOGPROJE.SERVICES.EmailService.Concrete;
+using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
+using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,8 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
         {
             services.AddControllersWithViews();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IUyeRepository, UyeRepository>();
+            services.AddTransient<IMakaleRepository, MakaleRepository>();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=.;database=MVCPROJE2_BLOGDB;uid=yusuf;pwd=123"));
             services.AddIdentity<IdentityUser, IdentityRole>(x =>
             {
