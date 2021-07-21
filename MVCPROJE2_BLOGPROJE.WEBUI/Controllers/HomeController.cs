@@ -34,7 +34,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public IActionResult Konu() => View();
         public IActionResult Hakkimizda() => View();
        
-
        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
