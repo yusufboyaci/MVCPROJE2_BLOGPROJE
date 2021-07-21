@@ -45,8 +45,9 @@
 }
 
 .linkler {
-    position: absolute;
+    position: static;
     right: 40px;
+  
 }
 
 .btnAyarlarLogin {
