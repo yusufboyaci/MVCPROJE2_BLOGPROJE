@@ -1,7 +1,209 @@
-﻿@{
+﻿@model Tuple<IEnumerable<Makale>,IEnumerable<Konu>>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
     
+        <div class="jumbotron text-center mainHeader">
+            <h1>HAYDİ GÜZEL FİKİRLERİNİZİ GÖRELİM</h1>
+            <p>Okuyun ve paylaşın yeni bakış açılarınızı ve güzel fikirlerinizi...</p>
+        </div>
+    
+
+    <div style="margin-top:30px">
+ 
+
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 sticky-top">
+
+                <h3>Konular</h3>
+                <p>Konu Listesi</p>
+
+                @foreach (var item in Model.Item2)
+                {
+
+
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="MakaleKonulari" asp-route-id="@item.ID">@Html.Raw(item.KonuBasliklari)</a>
+                        </li>
+
+                    </ul>
+                }
+            </div>
+
+
+
+
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+
+                @* MEDIUM *@
+
+                <div class="row" style="margin-bottom:20px">
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://d15omoko64skxi.cloudfront.net/wp-content/uploads/2015/05/Medium-logo-dark500-300x300.png" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://kogosociety.com/yuklenenler/e-harfi-jpg.2056/" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://st3.myideasoft.com/idea/do/63/myassets/products/359/simli-eva-d-harf-siyah.jpg?revision=1570779669" width="80" height="80" />
+                    </div>
+
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://img-s2.onedio.com/id-53ef1753d8aaa8223fd44da7/rev-0/w-635/listing/f-jpg-webp/s-63bfacbe24d3e3779b6e188ae5a61536429aced9.webp" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://i.pinimg.com/474x/8a/1f/57/8a1f57f3b6843166391599d221222bb6.jpg" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://d15omoko64skxi.cloudfront.net/wp-content/uploads/2015/05/Medium-logo-dark500-300x300.png" width="80" height="80" />
+                    </div>
+                </div>
+
+                <div class="w-100"></div>
+
+                @* SANAT *@
+
+                <div class="row " style="margin-bottom:30px">
+
+
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://i.pinimg.com/originals/14/6c/67/146c673da71faf72e037a4af7ac79b84.png" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://imgprd19.hobbylobby.com/6/26/5d/6265d8a54022d3aaf4dcdd7e8170c5d7be4da9dd/700Wx700H-189506-0320-px.jpg" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="http://www.tgldirect.com/product_files/257007621153/257007621153-700.jpg" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://imgprd19.hobbylobby.com/6/26/5d/6265d8a54022d3aaf4dcdd7e8170c5d7be4da9dd/700Wx700H-189506-0320-px.jpg" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://imgprd19.hobbylobby.com/8/30/e9/830e9f4e9cf91208726d068336f5d9f4c04341eb/700Wx700H-193276-0320-px.jpg" width="100" height="100" />
+                    </div>
+
+                </div>
+
+                <div class="w-100"></div>
+
+                @* KÜLTÜR *@
+
+                <div class="row" style="margin-top:30px">
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://i5.walmartimages.com/asr/35645a9f-a1fa-461d-8dda-846b769f550a_1.8c5adcc36831baefe9444f596dfc23fe.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/013/116/original/00DC-500x500.png?1275336092" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://cdn11.bigcommerce.com/s-dpaf5pw/products/210/images/381/L_block__22444.1456252981.386.513.jpg?c=2" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://imgprd19.hobbylobby.com/8/30/e9/830e9f4e9cf91208726d068336f5d9f4c04341eb/700Wx700H-193276-0320-px.jpg" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://s3.amazonaws.com/static.graphemica.com/glyphs/i500s/000/002/103/original/00DC-500x500.png?1275291874" width="80" height="80" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://pngimg.com/uploads/letter_r/letter_r_PNG93932.png" width="80" height="80" />
+                    </div>
+                </div>
+
+                @* MODA *@
+
+                <div class="row" style="margin-top:30px">
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="http://pngimg.com/uploads/letter_m/letter_m_PNG114.png" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://pngimg.com/uploads/letter_o/letter_o_PNG120.png" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        @*<img class="icerik" src="https://i.pinimg.com/originals/c3/4e/32/c34e32799c8bde75f96c7a0189ba20d9.jpg" width="100" height="100" />*@
+                        <img class="icerik" src="https://i.redd.it/kgk5dqhx5l211.png" width="100" height="100" />
+                    </div>
+                    <div class="col-xl col-lg col-md col-sm col">
+                        <img class="icerik" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVlHlCYekEbHXtCytRpVYSk2n-hQZqH_2rA&usqp=CAU" width="100" height="100" />
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div>
+
+
+            </div>
+
+            @foreach (var item in Model.Item1)
+            {
+
+
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 offset-xl-4 offset-lg-4 offset-md-4 offset-sm-4 offset-4">
+
+
+                    <br />
+
+                    <div class="card">
+
+
+                        <div class="card-body">
+                            <h2 class="card-title text-capitalize text-dark ">@Html.Raw(item.MakaleBasligi)</h2>
+                            <br />
+                            <br />
+                            <img src="~/resimler/@item.MakaleResim" class="rounded" width="300" />
+                            <br />
+                            <br />
+                            <br />
+
+
+
+                            <div class="col-xl-4 col-lg-4 col-sm-4 col-4">
+                                <p>
+                                    <img src="~/resimler/@item.Uye.KullaniciResim" class="rounded-circle" width="30" />
+                                    @Html.Raw(item.Uye.Ad + " " + item.Uye.Soyad)
+                                </p>
+                                @*<p>@Html.Raw(item.</p> Tarih ekle*@
+                                <p>@Html.ViewData["Saat"]</p>
+
+                            </div>
+
+
+                            <div class="col-xl-8 col-lg-8 col-sm-8 col-8">
+                                <hr class="d-sm-none">
+                                <a class="btn btn-outline-info" asp-controller="Makale" asp-action="ReadMakale" asp-route-id="@item.ID">Detaylar</a>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#myCollapsible" aria-controls="myCollapsible">devamını oku</button>
+                                <div id="myCollapsible" class="collapse">
+                                    <p class="paragraf">@Html.Raw(item.MakaleIcerigi)</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+            }
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
 </div>

@@ -10,8 +10,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
     {
         [HttpGet]
         public IActionResult Activation() => RedirectToAction("Index","Home");
-       
-
-       
+             
     }
 }

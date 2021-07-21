@@ -35,6 +35,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IUyeRepository, UyeRepository>();
             services.AddTransient<IMakaleRepository, MakaleRepository>();
+            services.AddTransient<IKonuRepository, KonuRepository>();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=.;database=MVCPROJE2_BLOGDB;uid=yusuf;pwd=123"));
             services.AddIdentity<IdentityUser, IdentityRole>(x =>
             {
