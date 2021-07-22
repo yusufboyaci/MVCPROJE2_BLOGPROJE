@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using MVCPROJE2_BLOGPROJE.CORE.Entities;
 using MVCPROJE2_BLOGPROJE.CORE.ViewModels;
-using MVCPROJE2_BLOGPROJE.SERVICES.EmailService.Concrete;
+using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,20 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender)
+        private readonly IUyeRepository _uyeRepository;
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender, IUyeRepository uyeRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _uyeRepository = uyeRepository;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
 
         [HttpGet]
         public IActionResult Register() => View();
@@ -44,11 +49,15 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    Guid activationCode = Guid.NewGuid();
-                    await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Üye olmak için tıklayınız</a>");
 
-                    //string code = await UserManager<UserLoginInfo>.GenerateEmailConfirmationTokenAsync(user.Id);
-
+                    Uye uye = new Uye
+                    {
+                        MailAdresi = model.Email
+                    };
+                   await _uyeRepository.UyeEkleAsync(uye);
+                    //Guid activationCode = Guid.NewGuid();
+                    //await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Üye olmak için tıklayınız</a>");
+                 
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (IdentityError error in result.Errors)
@@ -71,14 +80,14 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    
+
                     Guid activationCode = Guid.NewGuid();
 
                     await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Giriş için tıklayınız</a>");
 
                     return RedirectToAction("Index", "Home");
-                   
-                                       
+
+
                 }
                 ModelState.AddModelError(string.Empty, "Geçersiz Giriş Denemesi");
             }
@@ -87,7 +96,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

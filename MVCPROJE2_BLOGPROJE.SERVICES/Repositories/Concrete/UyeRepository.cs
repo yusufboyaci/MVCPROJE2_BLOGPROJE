@@ -23,11 +23,11 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             return _context.Uyeler.Find(id);
         }
 
-        public bool UyeEkle(Uye uye)
+        public async Task<bool> UyeEkleAsync(Uye uye)
         {
-            _context.Uyeler.Add(uye);
-           // _context.Makaleler.Where(x => x.UyeID == x.ID);
-            return _context.SaveChanges() > 0;
+            await _context.Uyeler.AddAsync(uye);
+            // _context.Makaleler.Where(x => x.UyeID == x.ID);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public bool UyeGuncelle(Uye uye)
@@ -36,7 +36,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             return _context.SaveChanges() > 0;
         }
 
-        public bool UyeKaydet() => _context.SaveChanges() > 0;
+        public async Task<bool> UyeKaydetAsync() => await _context.SaveChangesAsync() > 0;
 
         public bool UyeSil(int id)
         {

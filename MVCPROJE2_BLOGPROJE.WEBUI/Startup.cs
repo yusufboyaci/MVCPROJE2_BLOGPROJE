@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using MVCPROJE2_BLOGPROJE.DATAACCESS.Context;
 using MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods;
 using MVCPROJE2_BLOGPROJE.SERVICES.EmailService.Concrete;
+using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
+using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Concrete;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete;
 using System;
@@ -33,6 +35,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
         {
             services.AddControllersWithViews();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IUyeRepository, UyeRepository>();
             services.AddTransient<IMakaleRepository, MakaleRepository>();
             services.AddTransient<IKonuRepository, KonuRepository>();
@@ -51,8 +54,9 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
                 options.LoginPath = "/Account/Login";
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddSession();
 
-           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,9 +76,9 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
             app.UseStaticFiles();
             SeedData.Seed(app);
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseRouting();
-
+           
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

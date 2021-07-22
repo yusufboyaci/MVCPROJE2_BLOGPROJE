@@ -21,31 +21,30 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
 
         public Makale GetById(int id) => _context.Makaleler.Find(id);
 
-
-        public List<Konu> KonuListesi() => _context.Konular.ToList();
+        public async Task<List<Konu>> KonuListesiAsync() => await _context.Konular.ToListAsync();
         
-        public bool MakaleEkle(Makale makale)
+        public async Task<bool> MakaleEkleAsync(Makale makale)
         {
-            _context.Makaleler.Add(makale);
-            return _context.SaveChanges() > 0;
+           await _context.Makaleler.AddAsync(makale);
+           return await _context.SaveChangesAsync() > 0;
         }
 
         public bool MakaleGuncelle(Makale makale)
         {
-            _context.Makaleler.Update(makale);
+           _context.Makaleler.Update(makale);
             return _context.SaveChanges() > 0;
         }
 
-        public List<Makale> MakaleKonuDahilEt() => _context.Makaleler.Include(x => x.KonularMakaleler).ToList();
+        public async Task<List<Makale>> MakaleKonuDahilEtAsync() => await _context.Makaleler.Include(x => x.KonularMakaleler).ToListAsync();
       
 
         public bool MakaleSil(int id)
         {
-            _context.Makaleler.Remove(GetById(id));
+           _context.Makaleler.Remove(GetById(id));
             return _context.SaveChanges() > 0;
         }
 
-        public List<Makale> MakaleUyeDahilEt() => _context.Makaleler.Include(x => x.Uye).ToList();
+        public async Task<List<Makale>> MakaleUyeDahilEtAsync() => await _context.Makaleler.Include(x => x.Uye).ToListAsync();
        
     }
 }

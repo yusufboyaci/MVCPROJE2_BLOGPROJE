@@ -11,11 +11,11 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract
     {
         IQueryable<Makale> Makaleler { get; }
         Makale GetById(int id);
-        bool MakaleEkle(Makale makale);
+        Task<bool> MakaleEkleAsync(Makale makale);
         bool MakaleGuncelle(Makale makale);
         bool MakaleSil(int id);
-        List<Makale> MakaleUyeDahilEt();
-        List<Konu> KonuListesi();
-        List<Makale> MakaleKonuDahilEt();
+        Task<List<Makale>> MakaleUyeDahilEtAsync();
+        Task<List<Konu>> KonuListesiAsync();
+        Task<List<Makale>> MakaleKonuDahilEtAsync();
     }
 }

@@ -45,8 +45,10 @@
 }
 
 .linkler {
-    position: static;
+    
+    position: relative;
     right: 40px;
+    
   
 }
 

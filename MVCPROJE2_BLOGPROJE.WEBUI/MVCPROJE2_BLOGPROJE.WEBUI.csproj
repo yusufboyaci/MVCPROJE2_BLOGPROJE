@@ -24,4 +24,8 @@
     <ProjectReference Include="..\MVCPROJE2_BLOGPROJE.SERVICES\MVCPROJE2_BLOGPROJE.SERVICES.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\resimler\" />
+  </ItemGroup>
+
 </Project>

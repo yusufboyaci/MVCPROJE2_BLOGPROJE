@@ -1,0 +1,60 @@
+﻿@model Uye
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+
+
+<h4>Kullanıcı Bilgileirinizi Giriniz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Soyad" class="control-label"></label>
+                <input asp-for="Soyad" class="form-control" />
+                <span asp-validation-for="Soyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KullaniciAdi" class="control-label"></label>
+                <input asp-for="KullaniciAdi" class="form-control" />
+                <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MailAdresi" class="control-label"></label>
+                <input asp-for="MailAdresi" class="form-control" />
+                <span asp-validation-for="MailAdresi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KullaniciAciklama" class="control-label"></label>
+                <input asp-for="KullaniciAciklama" class="form-control" />
+                <span asp-validation-for="KullaniciAciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="KullaniciResim" class="control-label"></label>
+                <input asp-for="KullaniciResim" class="form-control" />
+                <span asp-validation-for="KullaniciResim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
