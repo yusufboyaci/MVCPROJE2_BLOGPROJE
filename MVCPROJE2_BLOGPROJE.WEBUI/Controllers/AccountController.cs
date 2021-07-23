@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -52,12 +53,17 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
                     Uye uye = new Uye
                     {
+                        IsActive = true,
                         MailAdresi = model.Email
                     };
+                    
                    await _uyeRepository.UyeEkleAsync(uye);
+
                     //Guid activationCode = Guid.NewGuid();
                     //await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Üye olmak için tıklayınız</a>");
-                 
+
+                    await _emailSender.SendEmailAsync(user.Email, "Üyelik İşlemleri", "<br />Üyelik işleminiz başarıyla gerçekleşmiştir.");
+
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (IdentityError error in result.Errors)
@@ -79,15 +85,10 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
                 if (result.Succeeded)
-                {
-
-                    Guid activationCode = Guid.NewGuid();
-
-                    await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Giriş için tıklayınız</a>");
-
+                {                 
+                    Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email && x.IsActive == true);
+                    HttpContext.Session.SetInt32("id", uye.ID);
                     return RedirectToAction("Index", "Home");
-
-
                 }
                 ModelState.AddModelError(string.Empty, "Geçersiz Giriş Denemesi");
             }

@@ -47,7 +47,9 @@
 .linkler {
     
     position: relative;
-    right: 40px;
+    right: 5px;
+    
+  text-align:right;
     
   
 }

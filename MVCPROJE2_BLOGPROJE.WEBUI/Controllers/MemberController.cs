@@ -33,13 +33,24 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         [HttpGet]
         public IActionResult Delete(Uye uye) => View(uye);
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete()
         {
-            id = (int) HttpContext.Session.GetInt32("id");
+          int id = (int) HttpContext.Session.GetInt32("id");
             _repository.UyeSil(id);
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public IActionResult Update(int id) => View(_repository.GetById(id));
+        [HttpPost]
+        public async Task<IActionResult> Update(Uye uye)
+        {
+            uye.ID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+            uye.IsActive = true;
+            await _imageService.ImageRecordAsync(uye);
+            _repository.UyeGuncelle(uye);
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
