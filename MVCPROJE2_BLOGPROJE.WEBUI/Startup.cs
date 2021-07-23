@@ -83,6 +83,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "AdminArea",
+                    areaName: "AdminArea",
+                    pattern: "AdminArea/{controller=Login}/{action=LoginForm}/{id?}"
+                    );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Uye>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+
+   
+}
+
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+}
+
+<h1>Üye Listesi</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+  <br />
+    <div style="width:90%;margin:auto;">
+        <table id="dataTable" class="table table-striped table-bordered flex-nowrap" width="100%" cellspacing="0">
+
+            <thead>
+                <tr>
+                    <th>
+                        Ad
+                    </th>
+                    <th>
+                        Soyad
+                    </th>
+                    <th>
+                        KullaniciAdi
+                    </th>
+                    <th>
+                        MailAdresi
+                    </th>
+                    <th>
+                        KullaniciAciklama
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        KullaniciResim
+                    </th>
+                    <th>
+                      Güncelle
+                    </th>
+                    <th>
+                        Detaylar
+                    </th>
+                    <th>
+                        Sil
+                    </th>
+
+                   
+                </tr>
+            </thead>
+
+
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Ad
+                        </td>
+                        <td>
+                            @item.Soyad
+                        </td>
+                        <td>
+                            @item.KullaniciAdi
+                        </td>
+                        <td>
+                            @item.MailAdresi
+                        </td>
+                        <td>
+                            @item.KullaniciAciklama
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                            @item.IsActive
+                        </td>
+                        <td>
+                            @item.KullaniciResim
+                        </td>
+
+
+                        <td><a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ID">Güncelle</a></td>
+                        
+
+                        <td>
+
+                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">Details</a>
+
+                        </td>
+                        <td>
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+                                Sil
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Silmek İstediğinize Emin misiniz?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <a class="btn btn-danger text-center" asp-action="Delete" asp-route-id="@item.ID">Sil</a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}

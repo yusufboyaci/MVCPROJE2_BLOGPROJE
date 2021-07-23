@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <title>LoginForm</title>
+</head>
+<body>
+    <h3>Login Page</h3>
+
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="col-6 d-flex justify-content-center">
+                @ViewBag.error
+                <form method="post" asp-controller="Login" asp-action="AdminLogin">
+                    <table border="0" cellpadding="2" cellspacing="2">
+                        <tr>
+                            <td>Username</td>
+                            <td><input type="text" name="userName"></td> @*name değer atamamızı sağlıyor değişkenlere "name=" ile değer veriyoruz*@
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password"></td> @*Buradaki değerleri "name=" ile alıyor. Yani controller tarafında string olarak alınan username ve password u burada "name" olarak vermen lazım ki verilen değerleri alabilesin*@
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input type="submit" value="Login"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
