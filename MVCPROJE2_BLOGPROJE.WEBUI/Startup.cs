@@ -12,6 +12,8 @@ using MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods;
 using MVCPROJE2_BLOGPROJE.SERVICES.EmailService.Concrete;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Concrete;
+using MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Abstract;
+using MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete;
 using System;
@@ -34,6 +36,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IUyeRepository, UyeRepository>();
