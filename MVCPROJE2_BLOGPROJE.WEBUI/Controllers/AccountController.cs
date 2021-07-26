@@ -42,7 +42,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             if (ModelState.IsValid)
             {
                 IdentityUser user = new IdentityUser
-                {
+                {                   
                     UserName = model.Email,
                     Email = model.Email
                 };
@@ -74,6 +74,9 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             }
             return View(model);
         }
+
+        //IdentityUser user = _userManager.
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login() => View();
@@ -81,6 +84,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel user)
         {
+
             if (ModelState.IsValid)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
@@ -88,6 +92,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 {                 
                     Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email && x.IsActive == true);
                     HttpContext.Session.SetInt32("id", uye.ID);
+                    //HttpContext.Session.SetString("accountId", user.Id);//login id sini burda ver
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Geçersiz Giriş Denemesi");

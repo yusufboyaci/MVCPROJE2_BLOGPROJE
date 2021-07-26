@@ -19,12 +19,16 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         private readonly IImageService _imageService;
         private readonly IRegistrationService _registrationService;
         private readonly IEmailSender _emailSender;
-        public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender)
+        private readonly IUpdateRegistrationService _updateRegistrationService;
+
+        public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender, IUpdateRegistrationService updateRegistrationService)
         {
             _repository = repository;
             _imageService = imageService;
             _registrationService = registrationService;
             _emailSender = emailSender;
+            _updateRegistrationService = updateRegistrationService;
+
         }
         Random rnd = new Random();
 
@@ -40,12 +44,12 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 Email = uye.MailAdresi,
                 Password = rnd.Next(1, 20).ToString() + Convert.ToChar(rnd.Next(65, 91)) + rnd.Next(10, 100).ToString() + Convert.ToChar(rnd.Next(97, 123))
             };
-           
+
             model.ConfirmPassword = model.Password;
 
             await _registrationService.RegisterAsync(model);
             await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
-            return RedirectToAction("Index","MemberManagment", new { area = "AdminArea" });
+            return RedirectToAction("Index", "MemberManagment", new { area = "AdminArea" });
         }
 
         [HttpGet]
@@ -59,14 +63,23 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int id) => View(_repository.GetById(id));
+        public IActionResult Update()
+        {
+            int id = (int)HttpContext.Session.GetInt32("id");
+
+
+            return View(Tuple.Create<Uye, RegisterViewModel>(_repository.GetById(id), new RegisterViewModel()));
+        }
         [HttpPost]
-        public async Task<IActionResult> Update(Uye uye)
+        public async Task<IActionResult> Update([Bind(Prefix = "item1")] Uye uye, [Bind(Prefix = "item2")] RegisterViewModel model, string currentPassword, string newPassword)
         {
             uye.ID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+            string identityUserId = HttpContext.Session.GetString("accountId");
             uye.IsActive = true;
             await _imageService.ImageRecordAsync(uye);
             _repository.UyeGuncelle(uye);
+            model.Email = uye.MailAdresi;
+           // await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
             return RedirectToAction("Index", "Home");
         }
 

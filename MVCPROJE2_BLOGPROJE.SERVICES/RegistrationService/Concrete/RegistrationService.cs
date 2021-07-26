@@ -22,17 +22,13 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
 
         public async Task RegisterAsync(RegisterViewModel model)
         {
-            
-                IdentityUser user = new IdentityUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email
-                };
-                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);                 
-                }          
+
+            IdentityUser user = new IdentityUser
+            {
+                UserName = model.Email,
+                Email = model.Email
+            };
+            await _userManager.CreateAsync(user, model.Password);           
         }
     }
 }

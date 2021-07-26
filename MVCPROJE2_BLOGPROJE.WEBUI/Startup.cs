@@ -37,6 +37,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
         {
             services.AddControllersWithViews();
             services.AddTransient<IRegistrationService, RegistrationService>();
+            services.AddTransient<IUpdateRegistrationService, UpdateRegistrationService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IUyeRepository, UyeRepository>();
