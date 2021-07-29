@@ -77,7 +77,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             await _imageService.ImageRecordAsync(uye);
             _repository.UyeGuncelle(uye);
             model.Email = uye.MailAdresi;
-            await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);//Servis çalışıyor identity user id sini bir şekilde al.
+            await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
             return RedirectToAction("Index", "Home");
         }
 

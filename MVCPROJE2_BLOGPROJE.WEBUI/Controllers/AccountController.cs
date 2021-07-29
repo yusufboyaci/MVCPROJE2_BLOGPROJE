@@ -27,12 +27,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             _uyeRepository = uyeRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
         [HttpGet]
         public IActionResult Register() => View();
         [HttpPost]
@@ -75,7 +69,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             return View(model);
         }
 
-        //IdentityUser user = _userManager.
+       
 
         [HttpGet]
         [AllowAnonymous]
