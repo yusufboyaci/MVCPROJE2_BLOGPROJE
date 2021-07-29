@@ -45,8 +45,8 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 {                   
                     UserName = model.Email,
                     Email = model.Email
-                };
-                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                };               
+               IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -87,12 +87,13 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
             if (ModelState.IsValid)
             {
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);               
                 if (result.Succeeded)
                 {                 
                     Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email && x.IsActive == true);
                     HttpContext.Session.SetInt32("id", uye.ID);
-                    //HttpContext.Session.SetString("accountId", user.Id);//login id sini burda ver
+                    IdentityUser userid = _userManager.Users.FirstOrDefault(x => x.Email == user.Email);        
+                    HttpContext.Session.SetString("accountId", await _userManager.GetUserIdAsync(userid));
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Geçersiz Giriş Denemesi");

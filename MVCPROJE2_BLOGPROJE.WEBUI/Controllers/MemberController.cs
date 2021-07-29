@@ -20,15 +20,14 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         private readonly IRegistrationService _registrationService;
         private readonly IEmailSender _emailSender;
         private readonly IUpdateRegistrationService _updateRegistrationService;
-
+       
         public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender, IUpdateRegistrationService updateRegistrationService)
         {
             _repository = repository;
             _imageService = imageService;
             _registrationService = registrationService;
             _emailSender = emailSender;
-            _updateRegistrationService = updateRegistrationService;
-
+            _updateRegistrationService = updateRegistrationService;         
         }
         Random rnd = new Random();
 
@@ -67,7 +66,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         {
             int id = (int)HttpContext.Session.GetInt32("id");
 
-
             return View(Tuple.Create<Uye, RegisterViewModel>(_repository.GetById(id), new RegisterViewModel()));
         }
         [HttpPost]
@@ -79,7 +77,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             await _imageService.ImageRecordAsync(uye);
             _repository.UyeGuncelle(uye);
             model.Email = uye.MailAdresi;
-           // await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
+            await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);//Servis çalışıyor identity user id sini bir şekilde al.
             return RedirectToAction("Index", "Home");
         }
 
