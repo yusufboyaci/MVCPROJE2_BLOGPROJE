@@ -68,16 +68,21 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public async Task<IActionResult> Update() => View(Tuple.Create<Uye, RegisterViewModel>(await _repository.GetByIdAsync((int)HttpContext.Session.GetInt32("id")), new RegisterViewModel()));
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([Bind(Prefix = "item1")] Uye uye, [Bind(Prefix = "item2")] RegisterViewModel model, string currentPassword, string newPassword)
         {
-            uye.ID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
-            string identityUserId = HttpContext.Session.GetString("accountId");
-            uye.IsActive = true;
-            await _imageService.ImageRecordAsync(uye);
-            _repository.UyeGuncelle(uye);
-            model.Email = uye.MailAdresi;
-            await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                uye.ID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+                string identityUserId = HttpContext.Session.GetString("accountId");
+                uye.IsActive = true;
+                await _imageService.ImageRecordAsync(uye);
+                _repository.UyeGuncelle(uye);
+                model.Email = uye.MailAdresi;
+                await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
 
     }

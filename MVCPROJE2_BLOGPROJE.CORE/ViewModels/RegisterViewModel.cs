@@ -9,7 +9,7 @@ namespace MVCPROJE2_BLOGPROJE.CORE.ViewModels
 {
     public class RegisterViewModel
     {      
-        [Required]
+        [Required(ErrorMessage = "Lütfen Mail alanını boş bırakmayınız")]
         [EmailAddress]
         public string Email { get; set; }
         [Required(ErrorMessage ="Lütfen Şifre alanını boş bırakmayınız")]

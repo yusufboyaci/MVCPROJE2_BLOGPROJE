@@ -38,7 +38,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _repository.UyeSilAsync(id);
-            //_updateRegistrationService.RemoveAsync();
+           await _updateRegistrationService.RemoveAsync();//identity tablosundanda uye silme işlemini yap
             return RedirectToAction("Index");
         }
     }
