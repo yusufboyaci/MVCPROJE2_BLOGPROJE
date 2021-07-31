@@ -18,9 +18,9 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
         }
         public IQueryable<Uye> Uyeler => _context.Uyeler;
 
-        public Uye GetById(int id)
+        public async Task<Uye> GetByIdAsync(int id)
         {
-            return _context.Uyeler.Find(id);
+            return await _context.Uyeler.FindAsync(id);
         }
 
         public async Task<bool> UyeEkleAsync(Uye uye)
@@ -38,10 +38,10 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
 
         public async Task<bool> UyeKaydetAsync() => await _context.SaveChangesAsync() > 0;
 
-        public bool UyeSil(int id)
+        public async Task<bool> UyeSilAsync(int id)
         {
-            _context.Uyeler.Remove(GetById(id));
-            return _context.SaveChanges() > 0;
+            _context.Uyeler.Remove(await GetByIdAsync(id));
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

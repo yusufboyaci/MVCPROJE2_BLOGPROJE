@@ -1,17 +1,19 @@
-﻿@model Uye
+﻿@model MVCPROJE2_BLOGPROJE.CORE.Entities.Uye
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h1>Update</h1>
 
-
-<h4>Kullanıcı Bilgilerinizi Giriniz</h4>
+<h4>Uye</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Add"  enctype="multipart/form-data">
+        <form asp-action="Update">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Ad" class="control-label"></label>
                 <input asp-for="Ad" class="form-control" />
@@ -43,11 +45,12 @@
                 </label>
             </div>
             <div class="form-group">
+
                 <input asp-for="KullaniciResimYolu" type="file" class="form-control" accept=".jpg,.png,.gif,.jpeg">
                 <span asp-validation-for="KullaniciResimYolu" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

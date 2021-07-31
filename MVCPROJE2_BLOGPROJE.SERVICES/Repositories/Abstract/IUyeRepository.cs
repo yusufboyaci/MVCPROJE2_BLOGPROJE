@@ -10,10 +10,10 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract
     public interface IUyeRepository
     {
         IQueryable<Uye> Uyeler { get; }
-        Uye GetById(int id);
+       Task<Uye> GetByIdAsync(int id);
        Task<bool> UyeEkleAsync(Uye uye);
         bool UyeGuncelle(Uye uye);
-        bool UyeSil(int id);
+       Task<bool> UyeSilAsync(int id);
        Task<bool> UyeKaydetAsync();
     }
 }

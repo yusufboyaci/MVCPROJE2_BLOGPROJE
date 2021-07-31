@@ -25,5 +25,15 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
             await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
             
         }
+        public async Task UpdateAsync(string id)
+        {
+            IdentityUser user = await _userManager.FindByIdAsync(id);
+            await _userManager.UpdateAsync(user);
+        }
+        public async Task RemoveAsync(string id)
+        {
+            IdentityUser user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+        }
     }
 }

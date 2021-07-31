@@ -50,7 +50,7 @@
                     </td>
                     <td> @item.KullaniciResim</td>
 
-                    <td><a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ID">Güncelle</a></td>
+                    <td><a class="btn btn-outline-info" asp-controller="MemberManagement" asp-action="Update" asp-route-id="@item.ID">Güncelle</a></td>
                     <td>
 
                         <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">Details</a>
@@ -75,7 +75,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body text-center">
-                                        <a class="btn btn-danger text-center" asp-controller="DemoGrid" asp-action="Delete" asp-route-id="@item.ID">Sil</a>
+                                        <a class="btn btn-danger text-center" asp-area="AdminArea" asp-controller="MemberManagement" asp-action="Delete" asp-route-id="@item.ID">Sil</a>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>

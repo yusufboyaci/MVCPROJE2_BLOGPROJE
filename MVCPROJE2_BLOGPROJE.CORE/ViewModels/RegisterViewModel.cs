@@ -12,7 +12,7 @@ namespace MVCPROJE2_BLOGPROJE.CORE.ViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Lütfen Şifre alanını boş bırakmayınız")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [DataType(DataType.Password)]

@@ -21,7 +21,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
             if (userName != null && password != null && userName.Equals("admin") && password.Equals("123"))
             {
                 HttpContext.Session.SetString("username", userName);
-                return RedirectToAction("Index","MemberManagment",new { area = "AdminArea" });
+                return RedirectToAction("Index","MemberManagement",new { area = "AdminArea" });
             }
             else
             {

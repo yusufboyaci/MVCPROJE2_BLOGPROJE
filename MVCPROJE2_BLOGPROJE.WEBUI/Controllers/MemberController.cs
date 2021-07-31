@@ -20,14 +20,14 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         private readonly IRegistrationService _registrationService;
         private readonly IEmailSender _emailSender;
         private readonly IUpdateRegistrationService _updateRegistrationService;
-       
+
         public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender, IUpdateRegistrationService updateRegistrationService)
         {
             _repository = repository;
             _imageService = imageService;
             _registrationService = registrationService;
             _emailSender = emailSender;
-            _updateRegistrationService = updateRegistrationService;         
+            _updateRegistrationService = updateRegistrationService;
         }
         Random rnd = new Random();
 
@@ -48,26 +48,25 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
             await _registrationService.RegisterAsync(model);
             await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
-            return RedirectToAction("Index", "MemberManagment", new { area = "AdminArea" });
+            return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });
         }
 
         [HttpGet]
         public IActionResult Delete(Uye uye) => View(uye);
         [HttpPost]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             int id = (int)HttpContext.Session.GetInt32("id");
-            _repository.UyeSil(id);
+            await _repository.UyeSilAsync(id);
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public async Task<IActionResult> MemberInfo() => View(await _repository.GetByIdAsync((int)HttpContext.Session.GetInt32("id")));
+
 
         [HttpGet]
-        public IActionResult Update()
-        {
-            int id = (int)HttpContext.Session.GetInt32("id");
+        public async Task<IActionResult> Update() => View(Tuple.Create<Uye, RegisterViewModel>(await _repository.GetByIdAsync((int)HttpContext.Session.GetInt32("id")), new RegisterViewModel()));
 
-            return View(Tuple.Create<Uye, RegisterViewModel>(_repository.GetById(id), new RegisterViewModel()));
-        }
         [HttpPost]
         public async Task<IActionResult> Update([Bind(Prefix = "item1")] Uye uye, [Bind(Prefix = "item2")] RegisterViewModel model, string currentPassword, string newPassword)
         {

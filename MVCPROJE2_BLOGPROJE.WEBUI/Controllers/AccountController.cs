@@ -42,9 +42,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 };               
                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
+                {                  
                     Uye uye = new Uye
                     {
                         IsActive = true,
