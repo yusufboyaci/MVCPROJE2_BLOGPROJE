@@ -39,24 +39,28 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                RegisterViewModel model = new RegisterViewModel
+                {
+                    Email = uye.MailAdresi,
+                    Password = rnd.Next(1, 20).ToString() + Convert.ToChar(rnd.Next(65, 91)) + rnd.Next(10, 100).ToString() + Convert.ToChar(rnd.Next(97, 123))
+                };
 
-                     
-            RegisterViewModel model = new RegisterViewModel
-            {
-                Email = uye.MailAdresi,
-                Password = rnd.Next(1, 20).ToString() + Convert.ToChar(rnd.Next(65, 91)) + rnd.Next(10, 100).ToString() + Convert.ToChar(rnd.Next(97, 123))
-            };
+                model.ConfirmPassword = model.Password;
 
-            model.ConfirmPassword = model.Password;
+                IdentityResult result = await _registrationService.RegisterAsync(model);
+                if (result.Succeeded)
+                {
+                    await _imageService.ImageRecordAsync(uye);
+                    await _repository.UyeEkleAsync(uye);
+                    await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
+                    return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });
+                }
 
-        bool IsAdded=  await _registrationService.RegisterAsync(model);
-            if (IsAdded)
-            {
-                await _imageService.ImageRecordAsync(uye);
-                await _repository.UyeEkleAsync(uye);
-                await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
-            }
-            return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                ModelState.AddModelError(string.Empty, "Geçersiz Giriş Denemesi");
             }
             return View(uye);
         }

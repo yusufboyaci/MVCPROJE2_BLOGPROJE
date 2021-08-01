@@ -1,4 +1,5 @@
-﻿using MVCPROJE2_BLOGPROJE.CORE.ViewModels;
+﻿using Microsoft.AspNetCore.Identity;
+using MVCPROJE2_BLOGPROJE.CORE.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Abstract
 {
     public interface IRegistrationService
     {
-        Task<bool> RegisterAsync(RegisterViewModel model);
+        Task<IdentityResult> RegisterAsync(RegisterViewModel model);
     }
 }

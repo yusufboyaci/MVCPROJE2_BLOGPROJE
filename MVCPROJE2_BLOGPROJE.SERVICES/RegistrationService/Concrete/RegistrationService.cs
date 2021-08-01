@@ -20,7 +20,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
             _signInManager = signInManager;
         }
 
-        public async Task<bool> RegisterAsync(RegisterViewModel model)
+        public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
         {
 
             IdentityUser user = new IdentityUser
@@ -30,14 +30,14 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
             };
            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
-            if (result.Succeeded)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //if (result.Succeeded)
+            //{
+                return result;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
     }
 }
