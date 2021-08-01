@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MVCPROJE2_BLOGPROJE.CORE.Entities;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Abstract;
@@ -16,11 +17,15 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         private readonly IUyeRepository _repository;
         private readonly IImageService _imageService;
         private readonly IUpdateRegistrationService _updateRegistrationService;
-        public MemberManagementController(IUyeRepository repository, IImageService imageService, IUpdateRegistrationService updateRegistrationService)
+
+
+        private readonly UserManager<IdentityUser> _userManager;
+        public MemberManagementController(IUyeRepository repository, IImageService imageService, IUpdateRegistrationService updateRegistrationService, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
             _imageService = imageService;
             _updateRegistrationService = updateRegistrationService;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -36,9 +41,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Delete(int id)
-        {
+        {           
+            Uye uye = await _repository.GetByIdAsync(id);
+            IdentityUser user = _userManager.Users.FirstOrDefault(x => x.Email == uye.MailAdresi);
             await _repository.UyeSilAsync(id);
-           await _updateRegistrationService.RemoveAsync();//identity tablosundanda uye silme işlemini yap
+            await _updateRegistrationService.RemoveAsync(user.Id);
             return RedirectToAction("Index");
         }
     }

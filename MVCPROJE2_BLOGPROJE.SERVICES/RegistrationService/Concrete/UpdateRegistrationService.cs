@@ -10,20 +10,15 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
 {
     public class UpdateRegistrationService : IUpdateRegistrationService
     {
-        private readonly UserManager<IdentityUser> _userManager;
-     
+        private readonly UserManager<IdentityUser> _userManager;       
         public UpdateRegistrationService(UserManager<IdentityUser> userManager)
         {
-            _userManager = userManager;
-           
+            _userManager = userManager;                      
         }
         public async Task UpdatePasswordAsync(string id,string currentPassword,string newPassword)
-        {
-           
-            IdentityUser user = await _userManager.FindByIdAsync(id);
-            
-            await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
-            
+        {           
+            IdentityUser user = await _userManager.FindByIdAsync(id);            
+            await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);          
         }
         public async Task UpdateAsync(string id)
         {
@@ -35,5 +30,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
             IdentityUser user = await _userManager.FindByIdAsync(id);
             await _userManager.DeleteAsync(user);
         }
+       
     }
 }

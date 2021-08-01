@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using MVCPROJE2_BLOGPROJE.CORE.Entities;
@@ -46,7 +47,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
             model.ConfirmPassword = model.Password;
 
-            await _registrationService.RegisterAsync(model);
+            await _registrationService.RegisterAsync(model);           
             await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
             return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });
         }

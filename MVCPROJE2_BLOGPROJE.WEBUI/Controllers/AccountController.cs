@@ -82,7 +82,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);               
                 if (result.Succeeded)
                 {                 
-                    Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email && x.IsActive == true);
+                    Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email);
                     HttpContext.Session.SetInt32("id", uye.ID);
                     IdentityUser userid = _userManager.Users.FirstOrDefault(x => x.Email == user.Email);        
                     HttpContext.Session.SetString("accountId", await _userManager.GetUserIdAsync(userid));
