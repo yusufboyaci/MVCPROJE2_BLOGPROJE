@@ -29,6 +29,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
                 Email = model.Email
             };
            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+
             if (result.Succeeded)
             {
                 return true;

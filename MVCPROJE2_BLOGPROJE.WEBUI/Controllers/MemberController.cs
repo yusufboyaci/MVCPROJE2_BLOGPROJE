@@ -37,7 +37,10 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Uye uye)
         {
-                       
+            if (ModelState.IsValid)
+            {
+
+                     
             RegisterViewModel model = new RegisterViewModel
             {
                 Email = uye.MailAdresi,
@@ -49,12 +52,13 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         bool IsAdded=  await _registrationService.RegisterAsync(model);
             if (IsAdded)
             {
-
                 await _imageService.ImageRecordAsync(uye);
                 await _repository.UyeEkleAsync(uye);
                 await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
             }
             return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });
+            }
+            return View(uye);
         }
 
         [HttpGet]
