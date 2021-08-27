@@ -29,10 +29,14 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public bool MakaleGuncelle(Makale makale)
+        public async Task<bool> MakaleGuncelleAsync(Makale makale)
         {
-            _context.Makaleler.Update(makale);
-            return _context.SaveChanges() > 0;
+            await Task.Run(() =>
+            {
+                _context.Makaleler.Update(makale);
+            });
+
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<List<Makale>> MakaleKonuDahilEtAsync() => await _context.Makaleler.Include(x => x.KonularMakaleler).ToListAsync();

@@ -12,7 +12,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract
         IQueryable<Makale> Makaleler { get; }
         Task<Makale> GetByIdAsync(int id);
         Task<bool> MakaleEkleAsync(Makale makale);
-        bool MakaleGuncelle(Makale makale);
+        Task<bool> MakaleGuncelleAsync(Makale makale);
         Task<bool> MakaleSilAsync(int id);
         Task<List<Makale>> MakaleUyeDahilEtAsync();
         Task<List<Konu>> KonuListesiAsync();

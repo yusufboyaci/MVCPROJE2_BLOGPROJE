@@ -30,10 +30,14 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public bool UyeGuncelle(Uye uye)
+        public async Task<bool> UyeGuncelleAsync(Uye uye)
         {
-            _context.Uyeler.Update(uye);
-            return _context.SaveChanges() > 0;
+            await Task.Run(() =>
+            {
+                _context.Uyeler.Update(uye);
+            });
+
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> UyeKaydetAsync() => await _context.SaveChangesAsync() > 0;

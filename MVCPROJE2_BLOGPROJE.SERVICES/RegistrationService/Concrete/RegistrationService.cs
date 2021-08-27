@@ -12,12 +12,10 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
 {
     public class RegistrationService : IRegistrationService
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public RegistrationService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly UserManager<IdentityUser> _userManager;       
+        public RegistrationService(UserManager<IdentityUser> userManager)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userManager = userManager;            
         }
 
         public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
@@ -28,16 +26,8 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
                 UserName = model.Email,
                 Email = model.Email
             };
-           IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-
-            //if (result.Succeeded)
-            //{
-                return result;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            return result;
         }
     }
 }

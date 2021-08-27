@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -35,7 +36,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IUpdateRegistrationService, UpdateRegistrationService>();
             services.AddTransient<IEmailSender, EmailSender>();
@@ -56,6 +57,14 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/Login";
+                options.LogoutPath= "/Account/Logout";
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "MVCPROJE2BLOGPROJE",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    SecurePolicy = CookieSecurePolicy.Always
+                };
             });
 
             services.AddDistributedMemoryCache();
@@ -77,12 +86,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            SeedData.Seed(app);
-            app.UseAuthentication();
             app.UseSession();
+            app.UseStaticFiles();
+            SeedData.Seed(app);            
             app.UseRouting();
-           
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

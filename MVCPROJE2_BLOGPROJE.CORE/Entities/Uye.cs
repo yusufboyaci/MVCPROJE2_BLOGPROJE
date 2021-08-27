@@ -14,12 +14,17 @@ namespace MVCPROJE2_BLOGPROJE.CORE.Entities
         [Key]
         public int ID { get; set; }
         [StringLength(50)]
+        [Required(ErrorMessage ="Lütfen adınızı yazınız.")]
         public string Ad { get; set; }
         [StringLength(50)]
+        [Required(ErrorMessage ="Lütfen soyadınızı yazınız.")]
         public string Soyad { get; set; }
-        [StringLength(250)]
+        [StringLength(100)]
+        [Required(ErrorMessage ="Lütfen kullanıcı adını yazınız.")]
         public string KullaniciAdi { get; set; }
         [DataType(DataType.EmailAddress)]
+        [StringLength(500)]
+        [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
         public string MailAdresi { get; set; }
         public string KullaniciAciklama { get; set; }
         public bool IsActive { get; set; }

@@ -1,5 +1,4 @@
-﻿@model Tuple<Uye, RegisterViewModel>
-
+﻿@model Uye
 @{
     ViewData["Title"] = "Update";
 }
@@ -12,51 +11,52 @@
     <div class="col-md-4">
         <form method="post" asp-controller="Member" asp-action="Update" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Item1.ID" />
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="Item1.Ad" class="control-label"></label>
-                <input asp-for="Item1.Ad" class="form-control" />
-                <span asp-validation-for="Item1.Ad" class="text-danger"></span>
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Item1.Soyad" class="control-label"></label>
-                <input asp-for="Item1.Soyad" class="form-control" />
-                <span asp-validation-for="Item1.Soyad" class="text-danger"></span>
+                <label asp-for="Soyad" class="control-label"></label>
+                <input asp-for="Soyad" class="form-control" />
+                <span asp-validation-for="Soyad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Item1.KullaniciAdi" class="control-label"></label>
-                <input asp-for="Item1.KullaniciAdi" class="form-control" />
-                <span asp-validation-for="Item1.KullaniciAdi" class="text-danger"></span>
+                <label asp-for="KullaniciAdi" class="control-label"></label>
+                <input asp-for="KullaniciAdi" class="form-control" />
+                <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Item1.MailAdresi" class="control-label"></label>
-                <input asp-for="Item1.MailAdresi" class="form-control" />
-                <span asp-validation-for="Item1.MailAdresi" class="text-danger"></span>
+                <label asp-for="MailAdresi" class="control-label"></label>
+                <input asp-for="MailAdresi" class="form-control" />
+                <span asp-validation-for="MailAdresi" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label>Şifrenizi Giriniz</label>
-                <input name="currentPassword" class="form-control" />
-                <span asp-validation-for="Item2.Password" class="text-danger"></span>
+                <input  type="password" name="currentPassword" class="form-control" />
+                <span class="text-danger">@ViewBag.PasswordError @ViewBag.NullPasswordError</span>
             </div>
             <div class="form-group">
-                <label asp-for="Item2.Password" class="control-label">Yeni Şifrenizi Giriniz</label>
-                <input asp-for="Item2.Password" name="newPassword" class="form-control" />
-                <span asp-validation-for="Item2.Password" class="text-danger"></span>
+                <label class="control-label">Yeni Şifrenizi Giriniz</label>
+                <input  type="password" name="newPassword" class="form-control" />
+                <span class="text-danger">@ViewBag.PasswordError @ViewBag.NullPasswordError</span>
             </div>
             <div class="form-group">
-                <label asp-for="Item1.KullaniciAciklama" class="control-label"></label>
-                <input asp-for="Item1.KullaniciAciklama" class="form-control" />
-                <span asp-validation-for="Item1.KullaniciAciklama" class="text-danger"></span>
+                <label asp-for="KullaniciAciklama" class="control-label"></label>
+                <input asp-for="KullaniciAciklama" class="form-control" />
+                <span asp-validation-for="KullaniciAciklama" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Item1.IsActive" /> @Html.DisplayNameFor(model => model.Item1.IsActive)
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                 </label>
             </div>
             <div class="form-group">
 
-                <input asp-for="Item1.KullaniciResimYolu" type="file" class="form-control" accept=".jpg,.png,.gif,.jpeg">
-                <span asp-validation-for="Item1.KullaniciResimYolu" class="text-danger"></span>
+                <input asp-for="KullaniciResimYolu" type="file" class="form-control" accept=".jpg,.png,.gif,.jpeg">
+                <span asp-validation-for="KullaniciResimYolu" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

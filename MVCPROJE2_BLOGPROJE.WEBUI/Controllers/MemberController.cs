@@ -79,11 +79,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Update() => View(Tuple.Create<Uye, RegisterViewModel>(await _repository.GetByIdAsync((int)HttpContext.Session.GetInt32("id")), new RegisterViewModel()));
+        public async Task<IActionResult> Update() => View(await _repository.GetByIdAsync((int)HttpContext.Session.GetInt32("id")));
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update([Bind(Prefix = "item1")] Uye uye, [Bind(Prefix = "item2")] RegisterViewModel model, string currentPassword, string newPassword)
+        public async Task<IActionResult> Update(Uye uye, string currentPassword, string newPassword)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,25 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 string identityUserId = HttpContext.Session.GetString("accountId");
                 uye.IsActive = true;
                 await _imageService.ImageRecordAsync(uye);
-                _repository.UyeGuncelle(uye);
-                model.Email = uye.MailAdresi;
-                await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
+                await _repository.UyeGuncelleAsync(uye);
+                if (currentPassword == null || newPassword == null)
+                {
+                    ViewBag.NullPasswordError = "Lütfen şifre alanını boş bırakmayınız";
+                    return View();
+                }
+                else
+                {
+                    if (currentPassword != newPassword)
+                    {
+                        await _updateRegistrationService.UpdatePasswordAsync(identityUserId, currentPassword, newPassword);
+                    }
+                    else
+                    {
+                        ViewBag.PasswordError = "Lütfen kullandığınız şifre ile yeni şifreyi aynı yapmayınız!";
+                        return View();
+                    }
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             return View();

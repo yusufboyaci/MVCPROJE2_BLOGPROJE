@@ -34,14 +34,20 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id) => View(await _repository.GetByIdAsync(id));
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Uye uye)
         {
-            _repository.UyeGuncelle(uye);
-            await _imageService.ImageRecordAsync(uye);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _repository.UyeGuncelleAsync(uye);
+                //await _updateRegistrationService.UpdateAsync()
+                await _imageService.ImageRecordAsync(uye);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         public async Task<IActionResult> Delete(int id)
-        {           
+        {
             Uye uye = await _repository.GetByIdAsync(id);
             IdentityUser user = _userManager.Users.FirstOrDefault(x => x.Email == uye.MailAdresi);
             await _repository.UyeSilAsync(id);

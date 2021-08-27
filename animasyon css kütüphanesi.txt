@@ -1,0 +1,9 @@
+animasyon için css kütüphanesi
+https://animate.style
+
+
+
+
+
+modal oluşturma kütüphanesi
+https://sweetalert2.github.io

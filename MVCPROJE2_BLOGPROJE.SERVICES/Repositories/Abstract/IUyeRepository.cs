@@ -12,7 +12,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract
         IQueryable<Uye> Uyeler { get; }
        Task<Uye> GetByIdAsync(int id);
        Task<bool> UyeEkleAsync(Uye uye);
-        bool UyeGuncelle(Uye uye);
+       Task<bool> UyeGuncelleAsync(Uye uye);
        Task<bool> UyeSilAsync(int id);
        Task<bool> UyeKaydetAsync();
     }

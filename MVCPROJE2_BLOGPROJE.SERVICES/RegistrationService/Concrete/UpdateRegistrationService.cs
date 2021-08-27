@@ -30,6 +30,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Concrete
             IdentityUser user = await _userManager.FindByIdAsync(id);
             await _userManager.DeleteAsync(user);
         }
-       
+
     }
 }
