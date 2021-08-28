@@ -12,6 +12,7 @@ namespace MVCPROJE2_BLOGPROJE.CORE.Entities
         [Key]
         public int ID { get; set; }
         [StringLength(300)]
+        [Display(Name ="Konular")]
         public string KonuBasliklari { get; set; }
         public virtual IEnumerable<UyeKonu> UyelerKonular { get; set; }
         public virtual IEnumerable<KonuMakale> KonularMakaleler { get; set; }

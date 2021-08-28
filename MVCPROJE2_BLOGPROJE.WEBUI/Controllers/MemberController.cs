@@ -91,7 +91,8 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 string identityUserId = HttpContext.Session.GetString("accountId");
                 uye.IsActive = true;
                 await _imageService.ImageRecordAsync(uye);
-                await _repository.UyeGuncelleAsync(uye);
+                await _repository.UyeGuncelleAsync(uye);               
+                await _updateRegistrationService.UpdateAsync(identityUserId,uye.MailAdresi);
                 if (currentPassword == null || newPassword == null)
                 {
                     ViewBag.NullPasswordError = "Lütfen şifre alanını boş bırakmayınız";

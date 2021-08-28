@@ -12,10 +12,14 @@ namespace MVCPROJE2_BLOGPROJE.CORE.Entities
    public class Makale
     {
         public int ID { get; set; }
+        [Display(Name ="Okunma Sayısı")]
         public int? OkunmaSayisi { get; set; }
+        [Display(Name ="Makeleniz")]
         public string MakaleIcerigi { get; set; }
         [StringLength(100)]
+        [Display(Name ="Başlık")]
         public string MakaleBasligi { get; set; }
+        [Display(Name ="Resim")]
         public string MakaleResim { get; set; }
         [NotMapped]
         public IFormFile ResimYolu { get; set; }

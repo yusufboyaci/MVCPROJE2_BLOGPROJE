@@ -17,8 +17,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         private readonly IUyeRepository _repository;
         private readonly IImageService _imageService;
         private readonly IUpdateRegistrationService _updateRegistrationService;
-
-
         private readonly UserManager<IdentityUser> _userManager;
         public MemberManagementController(IUyeRepository repository, IImageService imageService, IUpdateRegistrationService updateRegistrationService, UserManager<IdentityUser> userManager)
         {
@@ -38,10 +36,12 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         public async Task<IActionResult> Update(Uye uye)
         {
             if (ModelState.IsValid)
-            {
-                await _repository.UyeGuncelleAsync(uye);
-                //await _updateRegistrationService.UpdateAsync()
+            {               
+
                 await _imageService.ImageRecordAsync(uye);
+               
+                await _repository.UyeGuncelleAsync(uye);
+            
                 return RedirectToAction("Index");
             }
             return View();
@@ -54,5 +54,6 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
             await _updateRegistrationService.RemoveAsync(user.Id);
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Details(int id) => View(await _repository.GetByIdAsync(id));
     }
 }

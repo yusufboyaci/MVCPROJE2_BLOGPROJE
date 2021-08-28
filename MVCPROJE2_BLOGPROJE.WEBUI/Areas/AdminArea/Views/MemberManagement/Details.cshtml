@@ -1,13 +1,13 @@
 ﻿@model Uye
 
 @{
-    ViewData["Title"] = "MemberInfo";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Kullanıcı Bilgileri</h1>
+<h1>Kullanıcı Detayları</h1>
 
 <div>
-   
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Update" asp-route-id="@Model.ID">Bilgilerinizi Güncelleme</a> |   
-    <a asp-controller="Home" asp-action="Index">Geri Dön</a>
+    <a asp-action="Update" asp-route-id="@Model.ID">Güncelle</a> |
+    <a asp-action="Index">Geri Dön</a>
 </div>

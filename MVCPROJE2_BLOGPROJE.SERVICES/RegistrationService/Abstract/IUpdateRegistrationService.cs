@@ -11,6 +11,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.RegistrationService.Abstract
     {
         Task UpdatePasswordAsync(string id, string currentPassword, string newPassword);
         Task UpdateAsync(string id);
+        Task UpdateAsync(string id, string mail);
         Task RemoveAsync(string id);
     }
 }

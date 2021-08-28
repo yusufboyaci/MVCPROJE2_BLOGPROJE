@@ -5,13 +5,12 @@
     Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Update</h1>
+<h1>Kullanıcı Güncelleme Bölümü</h1>
 
-<h4>Uye</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Update">
+        <form method="post" asp-area="AdminArea" asp-controller="MemberManagement" asp-action="Update" enctype="multipart/form-data" >
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
@@ -31,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MailAdresi" class="control-label"></label>
-                <input asp-for="MailAdresi" class="form-control" />
+                <input asp-for="MailAdresi" class="form-control" style="pointer-events:none"/>
                 <span asp-validation-for="MailAdresi" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,13 +49,13 @@
                 <span asp-validation-for="KullaniciResimYolu" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Geri Dön</a>
 </div>
 
