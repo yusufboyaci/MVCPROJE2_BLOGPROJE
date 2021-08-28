@@ -42,13 +42,13 @@
                         <td> @item.Soyad</td>
                         <td> @item.KullaniciAdi</td>
                         <td> @item.MailAdresi</td>
-                        <td>@item.KullaniciAciklama</td>
+                        <td> @item.KullaniciAciklama</td>
 
                         <td>
                             @Html.DisplayFor(modelItem => item.IsActive)
                             @item.IsActive
                         </td>
-                        <td> @item.KullaniciResim</td>
+                        <td> <img src="~/resimler/@item.KullaniciResim" width="100"/></td>
 
                         <td><a class="btn btn-outline-info" asp-controller="MemberManagement" asp-action="Update" asp-route-id="@item.ID">Güncelle</a></td>
                         <td>
