@@ -1,0 +1,61 @@
+﻿@model Tuple<IEnumerable<Konu>, Makale>
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Makale Ekleme Bölümü</h4>
+<hr />
+<div class="row">
+    <div class="col-auto">
+        <form asp-controller="Essay" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Item2.MakaleBasligi" class="control-label"></label>
+                <input asp-for="Item2.MakaleBasligi" class="form-control" type="text" placeholder="Başlık" />
+                <span asp-validation-for="Item2.MakaleBasligi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item2.MakaleIcerigi" class="control-label"></label>
+                <textarea asp-for="Item2.MakaleIcerigi" name="Item2.MakaleIcerigi" id="editor1" rows="10" cols="80">
+                
+            </textarea>
+                <span asp-validation-for="Item2.MakaleIcerigi" class="text-danger"></span>
+            </div>            
+            <label>Konu Listesi</label>
+            <select name="KonuID" class="form-control">
+                @if (Model.Item1 != null)
+                {
+                    @foreach (Konu item in Model.Item1)
+                    {
+                        <option value="@item.ID">
+                            @item.KonuBasliklari
+                        </option>
+                    }
+                }
+            </select>
+            <div class="form-group">
+                <label asp-for="Item2.OkunmaSayisi" class="control-label"></label>
+                <input asp-for="Item2.OkunmaSayisi" class="form-control" />
+                <span asp-validation-for="Item2.OkunmaSayisi" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Item2.MakaleResim" class="control-label"></label>
+                <input type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Item2.MakaleResim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

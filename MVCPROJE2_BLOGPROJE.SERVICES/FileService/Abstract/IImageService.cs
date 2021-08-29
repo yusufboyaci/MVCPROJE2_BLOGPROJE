@@ -10,5 +10,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract
    public interface IImageService
     {
         Task ImageRecordAsync(Uye uye);
+        Task ImageRecordAsync(Makale makale);
     }
 }

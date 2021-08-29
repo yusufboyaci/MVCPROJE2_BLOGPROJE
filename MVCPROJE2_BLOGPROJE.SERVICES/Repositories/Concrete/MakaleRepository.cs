@@ -18,7 +18,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             _context = context;
         }
         public IQueryable<Makale> Makaleler => _context.Makaleler;
-
+        
         public async Task<Makale> GetByIdAsync(int id) => await _context.Makaleler.FindAsync(id);
 
         public async Task<List<Konu>> KonuListesiAsync() => await _context.Konular.ToListAsync();

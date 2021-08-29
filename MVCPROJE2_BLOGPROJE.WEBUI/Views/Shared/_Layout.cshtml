@@ -7,10 +7,12 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/AnaSayfaStyle.css" rel="stylesheet" />
-   
+
 
     <!--w3 CSS Kütüphanesi-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--Metin Editörü olarak CKEditor 4 kullanılmıştır-->
+    <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
 </head>
 <body>
     <header>
@@ -35,9 +37,9 @@
 
                                 <div class="dropdown-content">
 
-                                    <a asp-controller="Makale" asp-action="Create">Makale Ekleme Sayfası</a>
+                                    <a asp-controller="Essay" asp-action="Create">Makale Ekleme Sayfası</a>
 
-                                    <a asp-controller="Makale" asp-action="IndexMakale">Makale Listeleme Sayfası</a>
+                                    <a asp-controller="Essay" asp-action="Index">Makale Listeleme Sayfası</a>
                                     <a asp-controller="Home" asp-action="KonularMakaleGoster">Makale Okuma Sayfası</a>
                                     <a asp-controller="Home" asp-action="YazarDetaySayfasi">Yazar Detay Sayfası</a>
                                 </div>

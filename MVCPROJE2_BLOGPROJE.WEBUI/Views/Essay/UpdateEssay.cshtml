@@ -1,0 +1,63 @@
+﻿@model Makale
+
+@{
+    ViewData["Title"] = "UpdateEssay";
+}
+
+<h1>UpdateEssay</h1>
+
+<h4>Makale</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateEssay">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+
+            
+            <div class="form-group">
+                <label asp-for="MakaleBasligi" class="control-label"></label>
+                <input asp-for="MakaleBasligi" class="form-control" />
+                <span asp-validation-for="MakaleBasligi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MakaleIcerigi" class="control-label"></label>
+                <textarea asp-for="MakaleIcerigi" name="Item2.MakaleIcerigi" id="editor1" rows="10" cols="80">
+                
+            </textarea>
+                <span asp-validation-for="MakaleIcerigi" class="text-danger"></span>
+            </div>
+            <label>Konu Listesi</label>
+            <select name="KonuID" class="form-control">
+                @if (Model != null)
+                {
+                    @foreach (Konu item in Model)
+                    {
+                        <option value="@item.ID">
+                            @item.KonuBasliklari
+                        </option>
+                    }
+                }
+            </select>
+            <div class="form-group">
+                <label asp-for="OkunmaSayisi" class="control-label"></label>
+                <input asp-for="OkunmaSayisi" class="form-control" />
+                <span asp-validation-for="OkunmaSayisi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MakaleResim" class="control-label"></label>
+                <input type="file" asp-for="ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="MakaleResim" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

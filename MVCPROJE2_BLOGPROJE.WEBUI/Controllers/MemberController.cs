@@ -35,6 +35,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         [HttpGet]
         public IActionResult Add() => View();
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(Uye uye)
         {
             if (ModelState.IsValid)

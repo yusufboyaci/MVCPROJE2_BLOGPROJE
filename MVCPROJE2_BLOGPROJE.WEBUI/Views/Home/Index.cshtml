@@ -1,4 +1,4 @@
-﻿@model Tuple<IEnumerable<Makale>,IEnumerable<Konu>>
+﻿@model Tuple<IEnumerable<Makale>, IEnumerable<Konu>>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -6,15 +6,15 @@
 
 
 <div class="text-center">
-    
-        <div class="jumbotron text-center mainHeader">
-            <h1>HAYDİ GÜZEL FİKİRLERİNİZİ GÖRELİM</h1>
-            <p>Okuyun ve paylaşın yeni bakış açılarınızı ve güzel fikirlerinizi...</p>
-        </div>
-    
+
+    <div class="jumbotron text-center mainHeader">
+        <h1>HAYDİ GÜZEL FİKİRLERİNİZİ GÖRELİM</h1>
+        <p>Okuyun ve paylaşın yeni bakış açılarınızı ve güzel fikirlerinizi...</p>
+    </div>
+
 
     <div style="margin-top:30px">
- 
+
 
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 sticky-top">
@@ -131,17 +131,8 @@
                         <img class="icerik" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKVlHlCYekEbHXtCytRpVYSk2n-hQZqH_2rA&usqp=CAU" width="100" height="100" />
                     </div>
                 </div>
-
-
             </div>
-
-
-
-
-
             <div>
-
-
             </div>
 
             @foreach (var item in Model.Item1)
@@ -169,18 +160,16 @@
 
                             <div class="col-xl-4 col-lg-4 col-sm-4 col-4">
                                 <p>
-                                    <img src="~/resimler/@item.Uye.KullaniciResim" class="rounded-circle" width="30" />
-                                    @Html.Raw(item.Uye.Ad + " " + item.Uye.Soyad)
+                                    @*<img src="~/resimler/@item.Uye.KullaniciResim " class="rounded-circle" width="30" />*@
+                                    @*@Html.Raw(item.Uye.Ad + " " + item.Uye.Soyad)*@
                                 </p>
                                 @*<p>@Html.Raw(item.</p> Tarih ekle*@
                                 <p>@Html.ViewData["Saat"]</p>
 
                             </div>
-
-
                             <div class="col-xl-8 col-lg-8 col-sm-8 col-8">
                                 <hr class="d-sm-none">
-                                <a class="btn btn-outline-info" asp-controller="Makale" asp-action="ReadMakale" asp-route-id="@item.ID">Detaylar</a>
+                                <a class="btn btn-outline-info" asp-controller="Essay" asp-action="ReadEssay" asp-route-id="@item.ID">Detaylar</a>
                                 <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#myCollapsible" aria-controls="myCollapsible">devamını oku</button>
                                 <div id="myCollapsible" class="collapse">
                                     <p class="paragraf">@Html.Raw(item.MakaleIcerigi)</p>
@@ -191,19 +180,8 @@
                         </div>
                     </div>
                 </div>
-
                 <br />
             }
-
-
-
-
-
         </div>
-
-
     </div>
-
-
-
 </div>

@@ -34,7 +34,24 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.FileService.Concrete
                     uye.KullaniciResim = uye.KullaniciResimYolu.FileName;
                 }
             });
-
+        }
+        public async Task ImageRecordAsync(Makale makale)
+        {
+            await Task.Run(() =>
+            {
+                if (makale.ResimYolu != null)
+                {
+                    string resimler = Path.Combine(_environment.WebRootPath, "resimler");
+                    if (makale.ResimYolu.Length > 0)
+                    {
+                        using (FileStream file = new FileStream(Path.Combine(resimler, makale.ResimYolu.FileName), FileMode.Create))
+                        {
+                            makale.ResimYolu.CopyTo(file);
+                        }
+                    }
+                    makale.MakaleResim = makale.ResimYolu.FileName;
+                }
+            });
         }
     }
 }
