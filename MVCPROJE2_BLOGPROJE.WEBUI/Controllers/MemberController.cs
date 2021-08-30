@@ -95,7 +95,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 await _repository.UyeGuncelleAsync(uye);               
                 await _updateRegistrationService.UpdateAsync(identityUserId,uye.MailAdresi);
                 if (currentPassword == null || newPassword == null)
-                {
+                {                   
                     ViewBag.NullPasswordError = "Lütfen şifre alanını boş bırakmayınız";
                     return View();
                 }

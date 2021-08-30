@@ -31,16 +31,15 @@
                 <label asp-for="MailAdresi" class="control-label"></label>
                 <input asp-for="MailAdresi" class="form-control" />
                 <span asp-validation-for="MailAdresi" class="text-danger"></span>
-            </div>
-            
+            </div>         
             <div class="form-group">
                 <label>Şifrenizi Giriniz</label>
-                <input  type="password" name="currentPassword" class="form-control" />
+                <input  type="password" name="currentPassword" class="form-control"/>
                 <span class="text-danger">@ViewBag.PasswordError @ViewBag.NullPasswordError</span>
             </div>
             <div class="form-group">
                 <label class="control-label">Yeni Şifrenizi Giriniz</label>
-                <input  type="password" name="newPassword" class="form-control" />
+                <input  type="password" name="newPassword" class="form-control"/>
                 <span class="text-danger">@ViewBag.PasswordError @ViewBag.NullPasswordError</span>
             </div>
             <div class="form-group">
@@ -55,7 +54,7 @@
             </div>
             <div class="form-group">
 
-                <input asp-for="KullaniciResimYolu" type="file" class="form-control" accept=".jpg,.png,.gif,.jpeg">
+                <input asp-for="KullaniciResimYolu" type="file" class="form-control-file" accept=".jpg,.png,.gif,.jpeg">
                 <span asp-validation-for="KullaniciResimYolu" class="text-danger"></span>
             </div>
             <div class="form-group">

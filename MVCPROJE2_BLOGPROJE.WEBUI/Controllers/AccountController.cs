@@ -36,20 +36,23 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             if (ModelState.IsValid)
             {
                 IdentityUser user = new IdentityUser
-                {                   
+                {
                     UserName = model.Email,
                     Email = model.Email
-                };               
-               IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                };
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {                  
+                {
                     Uye uye = new Uye
                     {
                         IsActive = true,
-                        MailAdresi = model.Email
+                        MailAdresi = model.Email,
+                        Ad = "Adınız",
+                        Soyad = "Soyadınız",
+                        KullaniciAdi = "Kullanıcı Adınız"
                     };
-                    
-                   await _uyeRepository.UyeEkleAsync(uye);
+
+                    await _uyeRepository.UyeEkleAsync(uye);
 
                     //Guid activationCode = Guid.NewGuid();
                     //await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Üye olmak için tıklayınız</a>");
@@ -67,7 +70,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             return View(model);
         }
 
-       
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -79,12 +82,12 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 
             if (ModelState.IsValid)
             {
-                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);               
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, false);
                 if (result.Succeeded)
-                {                 
+                {
                     Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.MailAdresi == user.Email);
                     HttpContext.Session.SetInt32("id", uye.ID);
-                    IdentityUser userid = _userManager.Users.FirstOrDefault(x => x.Email == user.Email);        
+                    IdentityUser userid = _userManager.Users.FirstOrDefault(x => x.Email == user.Email);
                     HttpContext.Session.SetString("accountId", await _userManager.GetUserIdAsync(userid));
                     return RedirectToAction("Index", "Home");
                 }

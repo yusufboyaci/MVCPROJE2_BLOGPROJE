@@ -1,4 +1,4 @@
-﻿@model Makale
+﻿@model Tuple<IEnumerable<Konu>, Makale> 
 
 @{
     ViewData["Title"] = "UpdateEssay";
@@ -12,26 +12,26 @@
     <div class="col-md-4">
         <form asp-action="UpdateEssay">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="Item2.ID" />
 
             
             <div class="form-group">
-                <label asp-for="MakaleBasligi" class="control-label"></label>
-                <input asp-for="MakaleBasligi" class="form-control" />
-                <span asp-validation-for="MakaleBasligi" class="text-danger"></span>
+                <label asp-for="Item2.MakaleBasligi" class="control-label"></label>
+                <input asp-for="Item2.MakaleBasligi" class="form-control" />
+                <span asp-validation-for="Item2.MakaleBasligi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MakaleIcerigi" class="control-label"></label>
-                <textarea asp-for="MakaleIcerigi" name="Item2.MakaleIcerigi" id="editor1" rows="10" cols="80">
+                <label asp-for="Item2.MakaleIcerigi" class="control-label"></label>
+                <textarea asp-for="Item2.MakaleIcerigi" name="Item2.MakaleIcerigi" id="editor1" rows="10" cols="80">
                 
             </textarea>
-                <span asp-validation-for="MakaleIcerigi" class="text-danger"></span>
+                <span asp-validation-for="Item2.MakaleIcerigi" class="text-danger"></span>
             </div>
             <label>Konu Listesi</label>
             <select name="KonuID" class="form-control">
                 @if (Model != null)
                 {
-                    @foreach (Konu item in Model)
+                    @foreach (Konu item in Model.Item1)
                     {
                         <option value="@item.ID">
                             @item.KonuBasliklari
@@ -40,14 +40,14 @@
                 }
             </select>
             <div class="form-group">
-                <label asp-for="OkunmaSayisi" class="control-label"></label>
-                <input asp-for="OkunmaSayisi" class="form-control" />
-                <span asp-validation-for="OkunmaSayisi" class="text-danger"></span>
+                <label asp-for="Item2.OkunmaSayisi" class="control-label"></label>
+                <input asp-for="Item2.OkunmaSayisi" class="form-control" />
+                <span asp-validation-for="Item2.OkunmaSayisi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MakaleResim" class="control-label"></label>
-                <input type="file" asp-for="ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
-                <span asp-validation-for="MakaleResim" class="text-danger"></span>
+                <label asp-for="Item2.MakaleResim" class="control-label"></label>
+                <input type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Item2.MakaleResim" class="text-danger"></span>
             </div>
 
             <div class="form-group">

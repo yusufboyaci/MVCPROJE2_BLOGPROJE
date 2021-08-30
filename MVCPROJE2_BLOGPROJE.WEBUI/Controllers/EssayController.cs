@@ -26,7 +26,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         [HttpGet]
         public IActionResult Create() => View(Tuple.Create<IEnumerable<Konu>, Makale>(_konuService.Konular, new Makale()));
         [HttpPost]
-        public async Task<IActionResult> Create([Bind(Prefix ="item1")] Konu konu,[Bind(Prefix ="item2")] Makale makale)
+        public async Task<IActionResult> Create([Bind(Prefix = "item1")] Konu konu, [Bind(Prefix = "item2")] Makale makale)
         {
             if (ModelState.IsValid)
             {
@@ -47,23 +47,23 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             return View(makale);
         }
         [HttpGet]
-        public async Task<IActionResult> UpdateEssay(int id) => View(await _repository.GetByIdAsync(id));
+        public async Task<IActionResult> UpdateEssay(int id) => View(Tuple.Create<IEnumerable<Konu>, Makale>(_konuService.Konular, await _repository.GetByIdAsync(id)));
         [HttpPost]
-        public async Task<IActionResult> UpdateEssay(Makale makale)
+        public async Task<IActionResult> UpdateEssay([Bind(Prefix = "item1")] Konu konu, [Bind(Prefix = "item2")] Makale makale)
         {
             if (ModelState.IsValid)
-            {           
-            await _image.ImageRecordAsync(makale);
-            makale.UyeID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
-            await _repository.MakaleGuncelleAsync(makale);
-            return RedirectToAction("Index", "Home");
+            {
+                await _image.ImageRecordAsync(makale);
+                makale.UyeID = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+                await _repository.MakaleGuncelleAsync(makale);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 return View();
             }
         }
-        public async Task<IActionResult> Delete(int id) => View(await _repository.MakaleSilAsync(id)); 
-       
+        public async Task<IActionResult> Delete(int id) => View(await _repository.MakaleSilAsync(id));
+
     }
 }

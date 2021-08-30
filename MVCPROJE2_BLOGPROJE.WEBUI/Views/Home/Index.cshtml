@@ -1,4 +1,4 @@
-﻿@model Tuple<IEnumerable<Makale>, IEnumerable<Konu>>
+﻿@model Tuple<IEnumerable<Makale>, IEnumerable<Konu>,IEnumerable<Uye>>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -155,13 +155,10 @@
                             <br />
                             <br />
                             <br />
-
-
-
                             <div class="col-xl-4 col-lg-4 col-sm-4 col-4">
                                 <p>
-                                    @*<img src="~/resimler/@item.Uye.KullaniciResim " class="rounded-circle" width="30" />*@
-                                    @*@Html.Raw(item.Uye.Ad + " " + item.Uye.Soyad)*@
+                                    <img src="~/resimler/@item.Uye.KullaniciResim " class="rounded-circle" width="30" />
+                                    @Html.Raw(item.Uye.Ad + " " + item.Uye.Soyad)
                                 </p>
                                 @*<p>@Html.Raw(item.</p> Tarih ekle*@
                                 <p>@Html.ViewData["Saat"]</p>
