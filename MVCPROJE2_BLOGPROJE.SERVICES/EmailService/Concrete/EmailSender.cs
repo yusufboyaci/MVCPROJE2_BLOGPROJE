@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace MVCPROJE2_BLOGPROJE.SERVICES.EmailService.Concrete
-{
+{//SMTP ayarları için outlook kullanılacaksa google a "hotmail smtp ayarları" yaz gmail kullanılacaksa google a "gmail smtp ayarları" yaz
     public class EmailSender : IEmailSender
     {
         public EmailSender()
