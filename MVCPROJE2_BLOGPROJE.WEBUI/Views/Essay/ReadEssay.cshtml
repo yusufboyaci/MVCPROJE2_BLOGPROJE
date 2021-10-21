@@ -1,55 +1,69 @@
-﻿@model Makale
+﻿@model Tuple<Makale,Uye>
 
 @{
     ViewData["Title"] = "ReadEssay";
 }
 
-<h1>ReadEssay</h1>
+<h1> @Html.DisplayNameFor(model => model.Item1.MakaleIcerigi)</h1>
+<div class="col-auto text-center justify-content-center">
 
-<div>
-    <h4>Makale</h4>
-    <hr />
+
+    <div class=" text-center justify-content-center col-auto">
+        <dl class="row">
+           
+            <dd class="col-sm-10">
+                <h2 class=" text-capitalize text-center text-dark">
+                    @Html.DisplayFor(model => model.Item1.MakaleBasligi)
+                </h2>
+            </dd>
+            
+            <dd class="col-sm-10">
+                <img src="~/resimler/@Model.Item1.MakaleResim" width="500" />
+            </dd>
+        </dl>
+    </div>
+    <div class="text-center col-auto">
+
+        <div class="align-items-center align-content-center col-auto">
+            <dl class="row">
+
+                <dd class="col-sm-10  text-center">
+                    <img src="~/resimler/@Model.Item2.KullaniciResim" width="100" class="rounded-circle" />
+                </dd>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Item1.Uye.Ad)
+                    @Html.DisplayFor(model => model.Item1.Uye.Soyad)
+                </dd>
+
+
+                <dd class="col-sm-10">
+                    <p class="text-body text-center">
+                        @Html.Raw(Model.Item1.MakaleIcerigi)
+                    </p>
+                </dd>
+                <dd class="col-sm-10 text-center">
+                    @Html.DisplayNameFor(model => model.Item1.OkunmaSayisi)
+                    @Html.DisplayFor(model => model.Item1.OkunmaSayisi)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OkunmaSayisi)
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item1.KonuID)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OkunmaSayisi)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item1.KonuID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MakaleIcerigi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.Raw(Model.MakaleIcerigi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MakaleBasligi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MakaleBasligi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MakaleResim)
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="~/resimler/@Model.MakaleResim" width="100"/>
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KonuID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KonuID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Uye)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Uye.Ad)
-        </dd>
+
+
     </dl>
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="UpdateEssay" asp-route-id="@Model.Item1.ID">Güncelle</a> |
+    <a asp-controller="Home" asp-action="Index">Geri Dön</a>
 </div>

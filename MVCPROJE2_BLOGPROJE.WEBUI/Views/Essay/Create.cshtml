@@ -26,7 +26,7 @@
                 <span asp-validation-for="Item2.MakaleIcerigi" class="text-danger"></span>
             </div>            
             <label>Konu Listesi</label>
-            <select name="KonuID" class="form-control">
+            <select asp-for="Item2.KonuID" name="KonuID" class="form-control">
                 @if (Model.Item1 != null)
                 {
                     @foreach (Konu item in Model.Item1)

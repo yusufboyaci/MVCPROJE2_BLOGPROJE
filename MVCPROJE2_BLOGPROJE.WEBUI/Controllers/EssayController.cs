@@ -13,13 +13,15 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
     public class EssayController : Controller
     {
         private readonly IMakaleRepository _repository;
+        private readonly IUyeRepository _uyeRepository;
         private readonly IImageService _image;
         private readonly IKonuRepository _konuService;
-        public EssayController(IMakaleRepository repository, IImageService image, IKonuRepository konuService)
+        public EssayController(IMakaleRepository repository, IImageService image, IKonuRepository konuService, IUyeRepository uyeRepository)
         {
             _image = image;
             _repository = repository;
             _konuService = konuService;
+            _uyeRepository = uyeRepository;
         }
         public IActionResult Index() => View(_repository.Makaleler);
 
@@ -44,8 +46,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public async Task<IActionResult> ReadEssay(int id)
         {
             Makale makale = await _repository.GetByIdAsync(id);
-            return View(makale);
+            Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.ID == makale.UyeID); 
+            return View(Tuple.Create<Makale, Uye>(makale, uye));
         }
+        [HttpPost]
+        public IActionResult ReadEssay([Bind(Prefix = "item1")] Makale makale, [Bind(Prefix = "item2")] Uye uye) => View();
         [HttpGet]
         public async Task<IActionResult> UpdateEssay(int id) => View(Tuple.Create<IEnumerable<Konu>, Makale>(_konuService.Konular, await _repository.GetByIdAsync(id)));
         [HttpPost]

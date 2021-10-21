@@ -22,7 +22,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
         {
             return await _context.Uyeler.FindAsync(id);
         }
-
         public async Task<bool> UyeEkleAsync(Uye uye)
         {
             await _context.Uyeler.AddAsync(uye);
