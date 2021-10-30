@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
 {
+    /*Bu controller iptal edilmiştir kullanılmamaktadır*/
     [Area("AdminArea")]
     public class LoginController : Controller
     {

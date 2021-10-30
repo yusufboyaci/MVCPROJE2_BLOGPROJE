@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVCPROJE2_BLOGPROJE.CORE.Entities;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    [Authorize(Roles ="Admin")]
     public class MemberManagementController : Controller
     {
         private readonly IUyeRepository _repository;

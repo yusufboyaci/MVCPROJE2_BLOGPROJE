@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 {
+   
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;

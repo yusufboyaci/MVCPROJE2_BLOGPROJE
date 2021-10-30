@@ -63,6 +63,7 @@
                             </li>
                         </ul>
 
+                        @await Component.InvokeAsync("AdminMenu")
                     }
                     else
                     {
@@ -83,11 +84,14 @@
                 <div class="collapse navbar-collapse d-flex justify-content-end">
 
                     <!-- Button trigger modal -->
-                    <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#exampleModal">
+                    @*<a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#exampleModal">
                         Başlayın
-                    </a>
+                    </a>*@
+
+
+
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    @*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -117,7 +121,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
+
+
+
+
+
+
+
                 </div>
             </div>
         </nav>
