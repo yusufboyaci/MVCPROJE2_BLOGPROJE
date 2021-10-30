@@ -57,12 +57,25 @@
 
                         </td>
                         <td>
+                            @if (item.Ad == "Admin" && item.Soyad == "Admin" && item.KullaniciAdi == "Admin" && item.MailAdresi == "admin@gmail.com")
+                            {
 
 
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
-                                Sil
-                            </button>
+                                <button disabled type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+                                    Sil
+                                </button>
+                            }
+                            else
+                            {
+
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+                                    Sil
+                                </button>
+
+                            }
+
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
