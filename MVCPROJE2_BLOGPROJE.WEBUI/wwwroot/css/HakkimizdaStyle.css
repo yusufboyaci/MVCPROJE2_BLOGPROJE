@@ -1,6 +1,6 @@
 ﻿/*Dropdown CSS*/
 .dropbtn {
-    background-color: white;
+    background-color: #ffc107;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -36,7 +36,7 @@
 }
 
 .dropdown:hover .dropbtn {
-    background-color: white;
+    background-color: #ffc107;
 }
 
 .fakeimg {
