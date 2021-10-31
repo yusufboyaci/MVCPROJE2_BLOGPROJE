@@ -9,7 +9,7 @@
 <h4>Makale</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-auto">
         <form asp-action="UpdateEssay">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Item2.ID" />
@@ -28,8 +28,8 @@
                 <span asp-validation-for="Item2.MakaleIcerigi" class="text-danger"></span>
             </div>
             <label>Konu Listesi</label>
-            <select name="KonuID" class="form-control">
-                @if (Model != null)
+            <select asp-for="Item2.KonuID" class="form-control">
+                @if (Model.Item1 != null)
                 {
                     @foreach (Konu item in Model.Item1)
                     {

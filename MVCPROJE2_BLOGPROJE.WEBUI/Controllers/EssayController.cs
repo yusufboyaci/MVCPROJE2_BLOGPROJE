@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVCPROJE2_BLOGPROJE.CORE.Entities;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
@@ -23,7 +24,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             _konuService = konuService;
             _uyeRepository = uyeRepository;
         }
-        public IActionResult Index() => View(_repository.Makaleler);
+        public IActionResult Index() => View(_repository.Makaleler.Include(x => x.Uye));
 
         [HttpGet]
         public IActionResult Create() => View(Tuple.Create<IEnumerable<Konu>, Makale>(_konuService.Konular, new Makale()));
@@ -46,7 +47,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public async Task<IActionResult> ReadEssay(int id)
         {
             Makale makale = await _repository.GetByIdAsync(id);
-            Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.ID == makale.UyeID); 
+            Uye uye = _uyeRepository.Uyeler.FirstOrDefault(x => x.ID == makale.UyeID);
             return View(Tuple.Create<Makale, Uye>(makale, uye));
         }
         [HttpPost]
@@ -68,7 +69,10 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 return View();
             }
         }
-        public async Task<IActionResult> Delete(int id) => View(await _repository.MakaleSilAsync(id));
-
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _repository.MakaleSilAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }

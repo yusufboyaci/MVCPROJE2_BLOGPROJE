@@ -44,7 +44,7 @@
             <div class="form-group">
                 @*<label id="upload-photo-label" for="upload-photo" asp-for="Item2.MakaleResim" class="control-label btn btn-success"></label>
                 <input id="upload-photo" type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />*@
-                <label for="upload-photo" asp-for="Item2.MakaleResim" class="control-label text-capitalize"></label>
+                <label asp-for="Item2.MakaleResim" class="control-label text-capitalize"></label>
                 <input type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
 
                 <span asp-validation-for="Item2.MakaleResim" class="text-danger"></span>
