@@ -4,8 +4,6 @@
     ViewData["Title"] = "Create";
 }
 
-
-
 <h4>Makale Ekleme Bölümü</h4>
 <hr />
 <div class="row">
@@ -24,9 +22,9 @@
                 
             </textarea>
                 <span asp-validation-for="Item2.MakaleIcerigi" class="text-danger"></span>
-            </div>            
+            </div>
             <label>Konu Listesi</label>
-            <select asp-for="Item2.KonuID" name="KonuID" class="form-control">
+            <select asp-for="Item2.KonuID" class="form-control">
                 @if (Model.Item1 != null)
                 {
                     @foreach (Konu item in Model.Item1)
@@ -44,8 +42,11 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Item2.MakaleResim" class="control-label"></label>
+                @*<label id="upload-photo-label" for="upload-photo" asp-for="Item2.MakaleResim" class="control-label btn btn-success"></label>
+                <input id="upload-photo" type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />*@
+                <label for="upload-photo" asp-for="Item2.MakaleResim" class="control-label text-capitalize"></label>
                 <input type="file" asp-for="Item2.ResimYolu" class="form-control-file" accept=".jpg,.png,.gif,.jpeg" />
+
                 <span asp-validation-for="Item2.MakaleResim" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -19,7 +19,7 @@ namespace MVCPROJE2_BLOGPROJE.CORE.Entities
         [StringLength(100)]
         [Display(Name ="Başlık")]
         public string MakaleBasligi { get; set; }
-        [Display(Name ="Resim")]
+        [Display(Name ="Resim Yükleyiniz")]
         public string MakaleResim { get; set; }
         [NotMapped]
         public IFormFile ResimYolu { get; set; }
