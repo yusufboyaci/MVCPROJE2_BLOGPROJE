@@ -4,14 +4,7 @@
 @if (Model.Roles.Any(r => r.Equals("Admin")))
 {
    
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Home" asp-action="Hakkimizda">Hakkımızda</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Home" asp-action="Konu">Konu</a>
-        </li>
+    <ul class="navbar-nav">       
         <li class=" nav-item">
             <a class="nav-link text-dark" asp-area="AdminArea" asp-controller="MemberManagement" asp-action="Index">Admin Girişi</a>
         </li>
