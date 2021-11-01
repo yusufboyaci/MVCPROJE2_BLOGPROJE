@@ -65,8 +65,9 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI
                     SameSite = SameSiteMode.Strict,
                     SecurePolicy = CookieSecurePolicy.Always
                 };
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
             });
-
+           
             services.AddDistributedMemoryCache();
             services.AddSession();
 
