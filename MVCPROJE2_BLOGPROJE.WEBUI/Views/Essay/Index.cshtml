@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Makale>
+﻿@model IEnumerable<MakaleIndexViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,15 +7,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Makale Ekle</a>
 </p>
 <table class="table">
     <thead>
+
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.OkunmaSayisi)
             </th>
-           
+
             <th>
                 @Html.DisplayNameFor(model => model.MakaleBasligi)
             </th>
@@ -23,66 +24,69 @@
                 @Html.DisplayNameFor(model => model.MakaleResim)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KonuID)
+                @Html.DisplayNameFor(model => model.KonuBasliklari)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Uye)
+                @Html.DisplayNameFor(model => model.UyeAd)
             </th>
             <th></th>
         </tr>
+
+
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OkunmaSayisi)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OkunmaSayisi)
+                </td>
 
 
-            <td>
-                @Html.DisplayFor(modelItem => item.MakaleBasligi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MakaleResim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KonuID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uye.Ad) @Html.DisplayFor(modelItem => item.Uye.Soyad)
-            </td>
-        
-            <td>
-                <a asp-action="UpdateEssay" asp-route-id="@item.ID">Güncelle</a> |
-                <a asp-controller="Essay" asp-action="ReadEssay" asp-route-id="@item.ID">Makaleniz</a> |
+                <td>
+                    @Html.DisplayFor(modelItem => item.MakaleBasligi)
+                </td>
+                <td>
+                    <img src="~/resimler/@item.MakaleResim" class="rounded-circle" width="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KonuBasliklari)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UyeAd) @Html.DisplayFor(modelItem => item.UyeSoyad)
+                </td>
 
-                <a href="#" data-toggle="modal" data-target="#exampleModal">
-                    Sil
-                </a>
+                <td>
+                    <a asp-action="UpdateEssay" asp-route-id="@item.MakaleID">Güncelle</a> |
+                    <a asp-controller="Essay" asp-action="ReadEssay" asp-route-id="@item.MakaleID">Makaleniz</a> |
+
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">
+                        Sil
+                    </a>
 
 
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Silmek İstediğinize Emin misiniz?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body text-center">
-                                <a class="btn btn-danger text-center" asp-controller="Essay" asp-action="Delete" asp-route-id="@item.ID">Sil</a>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Silmek İstediğinize Emin misiniz?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <a class="btn btn-danger text-center" asp-controller="Essay" asp-action="Delete" asp-route-id="@item.MakaleID">Sil</a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

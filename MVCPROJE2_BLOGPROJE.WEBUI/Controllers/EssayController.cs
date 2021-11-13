@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCPROJE2_BLOGPROJE.CORE.Entities;
+using MVCPROJE2_BLOGPROJE.CORE.ViewModels;
 using MVCPROJE2_BLOGPROJE.SERVICES.FileService.Abstract;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
 using System;
@@ -24,7 +25,31 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             _konuService = konuService;
             _uyeRepository = uyeRepository;
         }
-        public IActionResult Index() => View(_repository.Makaleler.Include(x => x.Uye));
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var konu = _konuService.Konular;
+            var makale = _repository.Makaleler.Include(x => x.Uye);           
+            var liste = (
+                from k in konu
+                join m in makale
+                on k.ID equals m.KonuID
+                select new MakaleIndexViewModel
+                {
+                    MakaleID = m.ID,
+                    OkunmaSayisi = m.OkunmaSayisi,
+                    MakaleBasligi = m.MakaleBasligi,
+                    MakaleResim = m.MakaleResim,
+                    UyeAd = m.Uye.Ad,
+                    UyeSoyad = m.Uye.Soyad,
+                    KonuBasliklari = k.KonuBasliklari
+                }
+                         );
+
+            return View(liste);
+        }
+        [HttpPost]
+        public IActionResult Index([Bind(Prefix = "item1")] Makale makale, [Bind(Prefix = "item2")] Konu konu) => View();
 
         [HttpGet]
         public IActionResult Create() => View(Tuple.Create<IEnumerable<Konu>, Makale>(_konuService.Konular, new Makale()));
