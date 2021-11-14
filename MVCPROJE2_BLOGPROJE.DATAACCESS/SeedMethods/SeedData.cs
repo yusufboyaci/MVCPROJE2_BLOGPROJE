@@ -25,9 +25,9 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
             {
                 ApplicationDbContext context = servicesScope.ServiceProvider.GetService<ApplicationDbContext>();
                 context.Database.Migrate();
-               
 
-                if (!context.Users.Any() && !context.Roles.Any() && !context.UserRoles.Any())
+
+                if (!context.Users.Any(x => x.UserName == "admin@gmail.com") && !context.Roles.Any(x => x.Name == "Admin") && !context.UserRoles.Any())
                 {
                     var adminUser = new IdentityUser
                     {
@@ -61,8 +61,9 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                     });
 
                 }
+                context.SaveChanges();
 
-                if (!context.Uyeler.Any())
+                if (!context.Uyeler.Any(x => x.Ad == "Admin"))
                 {
                     context.Uyeler.AddRange(
                         new Uye
@@ -76,6 +77,7 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                         }
                         );
                 }
+                context.SaveChanges();
                 if (!context.Konular.Any())
                 {
                     context.Konular.AddRange(
