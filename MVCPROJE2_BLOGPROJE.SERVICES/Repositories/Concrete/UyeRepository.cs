@@ -26,7 +26,6 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
         public async Task<bool> UyeEkleAsync(Uye uye)
         {
             await _context.Uyeler.AddAsync(uye);
-            // _context.Makaleler.Where(x => x.UyeID == x.ID);
             return await _context.SaveChangesAsync() > 0;
         }
 

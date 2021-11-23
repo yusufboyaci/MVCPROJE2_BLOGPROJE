@@ -52,6 +52,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Areas.AdminArea.Controllers
         {
             Uye uye = await _repository.GetByIdAsync(id);
             IdentityUser user = _userManager.Users.FirstOrDefault(x => x.Email == uye.MailAdresi);
+            //IdentityUser user = _userManager.FindByIdAsync();
             await _repository.UyeSilAsync(id);
             await _updateRegistrationService.RemoveAsync(user.Id);
             return RedirectToAction("Index");

@@ -21,14 +21,18 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         private readonly IRegistrationService _registrationService;
         private readonly IEmailSender _emailSender;
         private readonly IUpdateRegistrationService _updateRegistrationService;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender, IUpdateRegistrationService updateRegistrationService)
+        public MemberController(IUyeRepository repository, IImageService imageService, IRegistrationService registrationService, IEmailSender emailSender, IUpdateRegistrationService updateRegistrationService, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
             _imageService = imageService;
             _registrationService = registrationService;
             _emailSender = emailSender;
             _updateRegistrationService = updateRegistrationService;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
         Random rnd = new Random();
 
@@ -66,13 +70,14 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
             return View(uye);
         }
 
+        
         [HttpGet]
-        public IActionResult Delete(Uye uye) => View(uye);
-        [HttpPost]
         public async Task<IActionResult> Delete()
         {
             int id = (int)HttpContext.Session.GetInt32("id");
             await _repository.UyeSilAsync(id);
+            await _userManager.DeleteAsync(await _userManager.FindByIdAsync(HttpContext.Session.GetString("accountId")));
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
