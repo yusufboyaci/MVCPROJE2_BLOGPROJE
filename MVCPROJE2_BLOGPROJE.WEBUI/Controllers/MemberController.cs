@@ -51,7 +51,7 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                 IdentityResult result = await _registrationService.RegisterAsync(model);
                 if (result.Succeeded)
                 {
-                    await _imageService.ImageRecordAsync(uye);
+                    await _imageService.ImageRecordAsync(uye);                  
                     await _repository.UyeEkleAsync(uye);
                     await _emailSender.SendEmailAsync(uye.MailAdresi, "Üyelik Şifreniz", $"Üyelik şifreniz: {model.Password}");
                     return RedirectToAction("Index", "MemberManagement", new { area = "AdminArea" });

@@ -27,7 +27,7 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                 context.Database.Migrate();
 
 
-                if (!context.Users.Any(x => x.UserName == "admin@gmail.com") && !context.Roles.Any(x => x.Name == "Admin") && !context.UserRoles.Any())
+                if (!context.Users.Any(x => x.UserName == "admin@gmail.com") && !context.Roles.Any(x => x.Name == "Admin"))
                 {
                     var adminUser = new IdentityUser
                     {
@@ -53,10 +53,14 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                     };
 
                     context.Roles.AddRange(role);
+                }
+                context.SaveChanges();
+                if (!context.UserRoles.Any())
+                {
                     context.UserRoles.AddRange(new IdentityUserRole<string>
                     {
-                        UserId = adminUser.Id,
-                        RoleId = role.Id
+                        UserId = context.Users.FirstOrDefault().Id,
+                        RoleId = context.Roles.FirstOrDefault().Id
 
                     });
 

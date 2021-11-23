@@ -27,25 +27,9 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.ViewComponents
         }
         public ViewViewComponentResult Invoke()
         {
-            var user = _userManager.GetUserAsync(HttpContext.User).Result;
-            var roles = _userManager.GetRolesAsync(user).Result;
-            if (user == null)
-            {
-                user= new IdentityUser
-                {
-                    UserName = "admin@gmail.com",
-                    NormalizedUserName = "ADMIN@GMAIL.COM",
-                    Email = "admin@gmail.com",
-                    NormalizedEmail = "ADMIN@GMAIL.COM",
-                    PhoneNumber = null,
-                    EmailConfirmed = true,
-                    PhoneNumberConfirmed = true,
-                    SecurityStamp = Guid.NewGuid().ToString(),
-                };
-               
-                user.PasswordHash = CreatePasswordHash(user, "admin");              
-            }
-
+          var user = _userManager.GetUserAsync(HttpContext.User).Result;
+          var  roles = _userManager.GetRolesAsync(user).Result;
+        
             return View(new UserWithRolesViewModel
             {
                 User = user,

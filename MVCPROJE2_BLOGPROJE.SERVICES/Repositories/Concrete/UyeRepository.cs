@@ -1,4 +1,5 @@
-﻿using MVCPROJE2_BLOGPROJE.CORE.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using MVCPROJE2_BLOGPROJE.CORE.Entities;
 using MVCPROJE2_BLOGPROJE.DATAACCESS.Context;
 using MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Abstract;
 using System;
@@ -17,7 +18,7 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
             _context = context;
         }
         public IQueryable<Uye> Uyeler => _context.Uyeler;
-
+        public IQueryable<IdentityRole> Roles => _context.Roles;
         public async Task<Uye> GetByIdAsync(int id)
         {
             return await _context.Uyeler.FindAsync(id);
@@ -44,6 +45,11 @@ namespace MVCPROJE2_BLOGPROJE.SERVICES.Repositories.Concrete
         public async Task<bool> UyeSilAsync(int id)
         {
             _context.Uyeler.Remove(await GetByIdAsync(id));
+            return await _context.SaveChangesAsync() > 0;
+        }
+        public async Task<bool> AddRole(IdentityRole role)
+        {
+            await _context.Roles.AddAsync(role);
             return await _context.SaveChangesAsync() > 0;
         }
     }

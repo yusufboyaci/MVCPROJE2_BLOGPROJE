@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
 {
-   
+
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -52,9 +52,19 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
                         Soyad = "Soyadınız",
                         KullaniciAdi = "Kullanıcı Adınız"
                     };
+                    if (!_uyeRepository.Roles.Any(x => x.Name == "kullanici"))
+                    {
+                        var role = new IdentityRole
+                        {
+                            Name = "kullanici",
+                            NormalizedName = "KULLANICI",
+                            ConcurrencyStamp = Guid.NewGuid().ToString()
+                        };
+                        await _uyeRepository.AddRole(role);
+                    }
 
                     await _uyeRepository.UyeEkleAsync(uye);
-
+                    await _userManager.AddToRoleAsync(user, "kullanici");
                     //Guid activationCode = Guid.NewGuid();
                     //await _emailSender.SendEmailAsync(user.Email, "Aktivasyon Maili", "<br /><a href = '" + string.Format("https://localhost:44318/Activation/Activation/{0}", activationCode) + "'>Üye olmak için tıklayınız</a>");
 
