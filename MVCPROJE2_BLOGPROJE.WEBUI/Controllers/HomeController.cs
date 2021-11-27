@@ -35,7 +35,11 @@ namespace MVCPROJE2_BLOGPROJE.WEBUI.Controllers
         public IActionResult Index([Bind(Prefix = "item1")] Makale item1, [Bind(Prefix = "item2")] Konu item2, [Bind(Prefix = "item3")] Uye item3) => View();
         public IActionResult Konu() => View();
         public IActionResult Hakkimizda() => View();
-       
+       public IActionResult MakaleListesi(int id)
+        {
+            IEnumerable<Makale> makaleListesi = _makaleRepository.Makaleler.Where(x => x.KonuID == id);
+           return View(makaleListesi);
+        }
        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

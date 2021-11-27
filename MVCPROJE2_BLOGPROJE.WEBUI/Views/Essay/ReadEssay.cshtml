@@ -1,11 +1,11 @@
 ﻿@model Tuple<Makale,Uye>
-
+    <link href="~/css/ReadEssayStyle.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "ReadEssay";
 }
 
-<h1> @Html.DisplayNameFor(model => model.Item1.MakaleIcerigi)</h1>
-<div class="col-auto text-center justify-content-center">
+<h1 class="text-center"> @Html.DisplayNameFor(model => model.Item1.MakaleIcerigi)</h1>
+<div class="col-auto text-center justify-content-center ortala">
 
 
     <div class=" text-center justify-content-center col-auto">
@@ -61,6 +61,5 @@
 </div>
 
 <div>
-    <a asp-action="UpdateEssay" asp-route-id="@Model.Item1.ID">Güncelle</a> |
     <a asp-controller="Home" asp-action="Index">Geri Dön</a>
 </div>

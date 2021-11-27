@@ -27,9 +27,9 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                 context.Database.Migrate();
 
 
-                if (!context.Users.Any(x => x.UserName == "admin@gmail.com") && !context.Roles.Any(x => x.Name == "Admin"))
+                if (!context.Users.Any(x => x.UserName == "admin@gmail.com"))
                 {
-                    var adminUser = new IdentityUser
+                    IdentityUser adminUser = new IdentityUser
                     {
                         UserName = "admin@gmail.com",
                         NormalizedUserName = "ADMIN@GMAIL.COM",
@@ -43,24 +43,29 @@ namespace MVCPROJE2_BLOGPROJE.DATAACCESS.SeedMethods
                     var passwordHashConverter = new SeedData();
                     adminUser.PasswordHash = passwordHashConverter.CreatePasswordHash(adminUser, "admin");
                     context.Users.AddRange(adminUser);
+                }
+                context.SaveChanges();
 
 
-                    var role = new IdentityRole
+                if (!context.Roles.Any(x => x.Name == "Admin"))
+                {
+                    IdentityRole role = new IdentityRole
                     {
                         Name = "Admin",
                         NormalizedName = "ADMIN",
                         ConcurrencyStamp = Guid.NewGuid().ToString()
                     };
-
                     context.Roles.AddRange(role);
                 }
                 context.SaveChanges();
-                if (!context.UserRoles.Any())
+
+
+                if (!context.Roles.Any(x => x.Name == "Admin"))
                 {
                     context.UserRoles.AddRange(new IdentityUserRole<string>
                     {
-                        UserId = context.Users.FirstOrDefault().Id,
-                        RoleId = context.Roles.FirstOrDefault().Id
+                        UserId = context.Users.FirstOrDefault(x => x.UserName == "admin@gmail.com").Id,
+                        RoleId = context.Roles.FirstOrDefault(x => x.Name == "Admin").Id
 
                     });
 
